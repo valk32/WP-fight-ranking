@@ -1,0 +1,137 @@
+{
+  "playerInfo": [
+    {
+      "main": {
+        "id": "1",
+        "name": "おくのたかし",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "バンタム級",
+        "img": "304.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 121
+      },
+      "record": [20, 12, 18]
+    },
+    {
+      "main": {
+        "id": "2",
+        "name": "細川一颯",
+        "age": 42,
+        "birth": "1992年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "ヘビー級",
+        "img": "344.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 221
+      },
+      "record": [14, 2, 12]
+    },
+    {
+      "main": {
+        "id": "3",
+        "name": "中岸風太",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "フライ級",
+        "img": "338.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 98
+      },
+      "record": [14, 2, 12]
+    },
+    {
+      "main": {
+        "id": "3",
+        "name": "中岸風太",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "フライ級",
+        "img": "338.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 311
+      },
+      "record": [14, 2, 12]
+    },
+    {
+      "main": {
+        "id": "3",
+        "name": "中岸風太",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "フライ級",
+        "img": "338.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 193
+      },
+      "record": [14, 2, 12]
+    },
+    {
+      "main": {
+        "id": "3",
+        "name": "中岸風太",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "フェザー級",
+        "img": "338.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 310
+      },
+      "record": [14, 2, 12]
+    },
+    {
+      "main": {
+        "id": "3",
+        "name": "中岸風太",
+        "age": 42,
+        "birth": "2002年",
+        "birthplace": "",
+        "height": "172cm",
+        "weight": "ヘビー級",
+        "img": "338.jpg",
+        "twitter": "",
+        "instagram": "",
+        "other": "",
+        "org": "RIZIN",
+        "rank": 32,
+        "vote": 99
+      },
+      "record": [14, 2, 12]
+    }
+  ]
+}

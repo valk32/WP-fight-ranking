@@ -1,0 +1,70 @@
+{
+  "rank": [
+    {
+      "id": "rizinRank",
+      "title": "RIZIN",
+      "contents": [
+        {
+          "name": "おくのたかし",
+          "rank": 1
+        },
+        {
+          "name": "中岸風太",
+          "rank": 2
+        },
+        {
+          "name": "細川一颯",
+          "rank": 3
+        },
+        {
+          "name": "細川一颯",
+          "rank": 12
+        },
+        {
+          "name": "細川一颯",
+          "rank": 3
+        },
+        {
+          "name": "細川一颯",
+          "rank": 3
+        },
+        {
+          "name": "細川一颯",
+          "rank": 3
+        },
+        {
+          "name": "細川一颯",
+          "rank": 3
+        }
+      ]
+    },
+    {
+      "id": "k1Rank",
+      "title": "K-1",
+      "contents": [
+        {
+          "name": "おくのたかし",
+          "rank": 1
+        },
+        {
+          "name": "中岸風太",
+          "rank": 2
+        }
+      ]
+    },
+    {
+      "id": "breakingDown",
+      "title": "Breakingdown",
+      "contents": [
+        {
+          "name": "おくのたかし",
+          "rank": 1
+        },
+        {
+          "name": "中岸風太",
+          "rank": 2
+        }
+      ]
+    }
+  ]
+}

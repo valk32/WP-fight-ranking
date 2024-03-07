@@ -1,0 +1,134 @@
+/*
+  Navbar button
+*/
+
+.g-navi-btn-off {
+  border-right: #000000 solid 1px;
+  background: #45484d;
+  /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #45484d 0%,
+    #45484d 6%,
+    #262626 9%,
+    #262626 88%,
+    #262626 91%,
+    #000000 93%
+  );
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #45484d 0%,
+    #45484d 6%,
+    #262626 9%,
+    #262626 88%,
+    #262626 91%,
+    #000000 93%
+  );
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #45484d 0%,
+    #45484d 6%,
+    #262626 9%,
+    #262626 88%,
+    #262626 91%,
+    #000000 93%
+  );
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000', GradientType=0);
+  /* IE6-9 */
+}
+.g-navi-btn-on {
+  border-right: #400000 solid 1px;
+  background: #da0000;
+  /* Old browsers */
+  background: -moz-linear-gradient(
+    top,
+    #da0000 0%,
+    #da0000 6%,
+    #aa0000 9%,
+    #aa0000 88%,
+    #aa0000 91%,
+    #400000 93%
+  );
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(
+    top,
+    #da0000 0%,
+    #da0000 6%,
+    #aa0000 9%,
+    #aa0000 88%,
+    #aa0000 91%,
+    #400000 93%
+  );
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #da0000 0%,
+    #da0000 6%,
+    #aa0000 9%,
+    #aa0000 88%,
+    #aa0000 91%,
+    #400000 93%
+  );
+}
+
+/*
+ Rank Number
+*/
+.f-rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 15px;
+  padding: 0px 0 0 0;
+  color: #fff;
+  text-align: center;
+  z-index: 5;
+  background-color: #000;
+  text-shadow: -1px -1px 1px #000, -1px 1px 1px #000, 1px -1px 1px #000,
+    1px 1px 1px #000;
+  border-radius: 2px 0 0 2px;
+}
+.f-rank24h span {
+  display: block;
+  margin-top: 3px;
+  padding: 2px 0 0 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  font-family: "Oswald", sans-serif;
+}
+.rank1 {
+  background-color: #daaf08;
+  background: linear-gradient(
+    45deg,
+    #b67b03 0%,
+    #daaf08 45%,
+    #fee9a0 65%,
+    #daaf08 80%,
+    #b67b03 90% 100%
+  );
+}
+.rank2 {
+  background-color: #9e9e9e;
+  background: linear-gradient(
+    45deg,
+    #757575 0%,
+    #9e9e9e 45%,
+    #e8e8e8 65%,
+    #9e9e9e 80%,
+    #757575 90% 100%
+  );
+}
+.rank3 {
+  background-color: #c16d22;
+  background: linear-gradient(
+    45deg,
+    #a23f17 0%,
+    #c16d22 45%,
+    #fec6a0 65%,
+    #c16d22 80%,
+    #a23f17 90% 100%
+  );
+}
