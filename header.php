@@ -159,3 +159,6 @@
             </div>
         </div>
     </nav>
+    <main class="px-4 py-36 bg-auto bg-cover bg-center"
+        style="background-image: url('http://localhost/fight-ranking/wp-content/uploads/2024/03/ring.jpg')">
+        <div class="w-[600px] mx-auto">

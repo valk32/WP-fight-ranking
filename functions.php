@@ -185,4 +185,60 @@ add_filter(
 
 add_filter('themeisle_sdk_enable_telemetry', '__return_true');
 
-add_theme_support('comments');
+//Custom Comment Form
+
+function custom_comment_form_fields($fields)
+{
+    // Remove the author, email, and URL fields
+    unset($fields['author']);
+    unset($fields['email']);
+    unset($fields['url']);
+
+    // Modify the comment field attributes as needed
+    $fields['comment_field'] = '<textarea name="comment" id="comment" cols="45" rows="3" class="p-3 bg-gray-300 border-3 border-gray-800" required></textarea>';
+
+    return $fields;
+}
+add_filter('comment_form_default_fields', 'custom_comment_form_fields');
+
+function custom_comment_form_submit_button($submit_button)
+{
+    // Customize the submit button as needed
+    $submit_button = '<button type="submit"
+                            class="p-3 py-2 mt-2 float-right bg-gray-900 hover:bg-gray-800 text-white rounded-md text-sm">
+                            <i class="fa fa-send"></i> 転送</button>';
+
+    return $submit_button;
+}
+add_filter('comment_form_submit_button', 'custom_comment_form_submit_button');
+
+function custom_comment_form_defaults($defaults)
+{
+    $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-xl bg-gray-900">
+                コメントを残す
+            </div>';
+    $defaults['fields']['redirect_to'] = '<input type="hidden" name="redirect_to" value="' . esc_url(get_permalink()) . '" />';
+
+    return $defaults;
+}
+add_filter('comment_form_defaults', 'custom_comment_form_defaults');
+
+function custom_comment_form_logged_in($message)
+{
+    $message = '';
+
+    return $message;
+}
+add_filter('comment_form_logged_in', 'custom_comment_form_logged_in');
+
+// Modify the comment form defaults
+// Redirect to the current page after comment submission
+function custom_comment_redirect($location)
+{
+    $referer = wp_get_referer();
+    if ($referer) {
+        return $referer;
+    }
+    return $location;
+}
+add_filter('comment_post_redirect', 'custom_comment_redirect');

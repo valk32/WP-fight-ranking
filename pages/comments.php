@@ -19,13 +19,11 @@ $comments_args = array(
 $comments_query = new WP_Comment_Query;
 $comments = $comments_query->query($comments_args);
 ?>
-<main class="px-4 py-28 bg-cover" style="background-image: url('assets/img/background4.jpg')">
-    <div class="w-[800px] mx-auto">
-        <section id="comment" class="bg-gray-100 shadow-md shadow-gray-700">
-            <h3 class="mt-3 p-3 text-white bg-gray-900 text-3xl">全コメント</h3>
-            <div id="commentSection" class="bg-opacity-50">
+<section id="comment" class="bg-gray-100 shadow-md shadow-gray-700">
+    <h3 class="mt-3 p-3 text-white bg-gray-900 text-3xl">全コメント</h3>
+    <div id="commentSection" class="bg-opacity-50">
 
-                <?php
+        <?php
 foreach ($comments as $key => $comment) {
     $img_url = wp_get_attachment_url(get_post_meta($comment->comment_post_ID, 'img', true));
 
@@ -33,7 +31,7 @@ foreach ($comments as $key => $comment) {
     echo '<div class="mx-2">';
     echo '<img src="' . $img_url . '" class="w-24 rounded-md border-3 border-gray-100" />';
     echo '</div>';
-    echo '<div class="p-1 mx-2">';
+    echo '<div class="p-1 mx-2 flex-1">';
     echo '<h3 class="font-bold"></h3>';
     echo '<p href="#">' . $comment->comment_content . '</p>';
     echo '<p class="text-sm"> ';
@@ -45,11 +43,11 @@ foreach ($comments as $key => $comment) {
 }
 ?>
 
-            </div>
+    </div>
 
-            <!-- Manual Pagination -->
-            <div class="pagination">
-                <?php
+    <!-- Manual Pagination -->
+    <div class="pagination">
+        <?php
 $total_comments = $comments_query->found_comments;
 $total_pages = ceil($total_comments / $comments_per_page);
 
@@ -65,10 +63,8 @@ if ($total_pages > 1) {
     echo '</div>';
 }
 ?>
-            </div>
-        </section>
     </div>
-</main>
+</section>
 
 <?php
 get_footer();
