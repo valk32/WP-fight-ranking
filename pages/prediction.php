@@ -46,8 +46,12 @@ if ($custom_query->have_posts()) {
         $type = get_post_meta($matchID, 'type', true);
         $result = get_post_meta($matchID, 'result', true);
 
-        $percent1 = $vote1 * 100 / ($vote1 + $vote2);
-        $percent2 = $vote2 * 100 / ($vote1 + $vote2);
+        if ($vote1 + $vote2 == 0) {
+            $percent1 = $percent2 = 50;
+        } else {
+            $percent1 = $vote1 * 100 / ($vote1 + $vote2);
+            $percent2 = $vote2 * 100 / ($vote1 + $vote2);
+        }
         $pinfo1 = new WP_Query(array(
             'post_type' => 'playerinfo',
             'meta_key' => 'name',
