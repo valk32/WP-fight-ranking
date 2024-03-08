@@ -113,6 +113,12 @@ if ($custom_query->have_posts()) {
         ));
         echo '</div>';
     }
+} else {
+    ?>
+    <div class="p-4 text-gray-900 text-2xl font-bold text-shadow-md text-center ">
+        該当選手がいません
+    </div>
+    <?php
 }
 
 // Restore the global post data

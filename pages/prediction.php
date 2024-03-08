@@ -12,12 +12,24 @@ get_header();
 <section id="vscardsBox">
 
     <?php
+$current_date = date('Y-m-d'); // Get the current date in the 'YYYY-MM-DD' format
 $args = array(
     'post_type' => 'match',
     'posts_per_page' => 10, // Number of posts to retrieve
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
-    'orderby' => 'date', // Order by numeric value
-    'order' => 'DESC', // Sort in ascending order
+    // 'orderby' => 'date', // Order by numeric value
+    // 'order' => 'DESC', // Sort in ascending order
+    'orderby' => 'meta_value', // Order by meta value
+    'meta_key' => 'date', // Custom field key for the date
+    'meta_query' => array(
+        array(
+            'key' => 'date',
+            'value' => $current_date,
+            'compare' => '>=',
+            'type' => 'DATE',
+        ),
+    ),
+    'order' => 'ASC', // Sort in ascending order
 );
 
 $custom_query = new WP_Query($args);
@@ -167,8 +179,8 @@ if ($custom_query->have_posts()) {
             </div>
         </div>
         <div
-            class="-top-5 w-52 text-center rounded-3xl absolute bg-gray-200 p-2 shadow-md shadow-gray-700 hover:bg-white  transition-all duration-500">
-            <?php echo $type; ?>
+            class="-top-5 w-56 text-center font-semibold rounded-3xl absolute bg-gray-200 p-2 shadow-md shadow-gray-700 hover:bg-white  transition-all duration-500">
+            <?php echo $type . '(' . (new DateTime($date))->format("Y-m-d") . ')'; ?>
         </div>
     </div>
     <?php
@@ -187,8 +199,13 @@ if ($custom_query->have_posts()) {
         ));
         echo '</div>';
     }
+} else {
+    ?>
+    <div class="p-4 text-gray-900 text-2xl font-bold text-shadow-md text-center ">
+        対戦なし
+    </div>
+    <?php
 }
-
 // Restore the global post data
 wp_reset_postdata();
 ?>

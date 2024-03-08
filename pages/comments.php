@@ -47,8 +47,14 @@ foreach ($comments as $key => $comment) {
     echo '<hr class="mx-2 text-bg-gray-800">';
     echo '</div>';
 }
-?>
 
+if (!$total_comments) {
+    ;
+}
+?>
+        <div class="p-4 text-gray-900 text-2xl font-bold text-shadow-md text-center ">
+            コメントなし
+        </div>
     </div>
 
 </section>
