@@ -21,6 +21,7 @@ $favorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
 $args = array(
     'post_type' => 'playerinfo',
     'posts_per_page' => 10, // Number of posts to retrieve
+    'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
     'meta_key' => $favorite != '' ? 'vote' : 'rank', // Custom field key to order by
     'orderby' => 'meta_value_num', // Order by numeric value
     'order' => $favorite != '' ? 'DESC' : 'ASC', // Sort in ascending order
@@ -43,15 +44,15 @@ $custom_query = new WP_Query($args);
 if ($custom_query->have_posts()) {
     while ($custom_query->have_posts()) {
         $custom_query->the_post();
-
-        $name = get_post_meta(get_the_ID(), 'name', true);
-        $age = get_post_meta(get_the_ID(), 'age', true);
-        $rank = get_post_meta(get_the_ID(), 'rank', true);
-        $vote = get_post_meta(get_the_ID(), 'vote', true);
-        $weight = get_post_meta(get_the_ID(), 'weight', true);
-        $org = get_post_meta(get_the_ID(), 'org', true);
-        $record = get_post_meta(get_the_ID(), 'record', true);
-        $img = wp_get_attachment_url(get_post_meta(get_the_ID(), 'img', true));
+        $playerID = get_the_ID();
+        $name = get_post_meta($playerID, 'name', true);
+        $age = get_post_meta($playerID, 'age', true);
+        $rank = get_post_meta($playerID, 'rank', true);
+        $vote = get_post_meta($playerID, 'vote', true);
+        $weight = get_post_meta($playerID, 'weight', true);
+        $org = get_post_meta($playerID, 'org', true);
+        $record = get_post_meta($playerID, 'record', true);
+        $img = wp_get_attachment_url(get_post_meta($playerID, 'img', true));
         ?>
 
     <div class="mx-1 my-3 flex items-center relative transition-all duration-500">
@@ -87,15 +88,31 @@ if ($custom_query->have_posts()) {
                 <p><?php echo $weight; ?></p>
                 <p><?php echo $org; ?></p>
             </div>
-            <button
-                class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-800 text-white rounded-md text-sm">
-                <i class="fa fa-thumbs-up"></i> 推奨
-            </button>
+            <form method="POST" action="/fight-ranking/vote">
+                <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
+                <button type="submit"
+                    class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-800 text-white rounded-md text-sm">
+                    <i class="fa fa-thumbs-up"></i> 推奨</button>
+            </form>
         </div>
     </div>
 
     <?php
 }
+
+    // Pagination
+    $total_pages = $custom_query->max_num_pages;
+    if ($total_pages > 1) {
+        $current_page = max(1, get_query_var('paged'));
+        echo '<div class="text-xl font-semibold text-shadow-lg">';
+        echo paginate_links(array(
+            'base' => add_query_arg('paged', '%#%'),
+            'format' => '', // URL structure for pagination links
+            'current' => $current_page,
+            'total' => $total_pages,
+        ));
+        echo '</div>';
+    }
 }
 
 // Restore the global post data

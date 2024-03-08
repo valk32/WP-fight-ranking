@@ -9,15 +9,21 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 <?php
-$comments_per_page = 10; // Number of comments per page
-$comments_args = array(
+$comments_per_page = 2; // Number of comments per page
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
+$args = array(
     'status' => 'approve', // Only approved comments
     'order' => 'DESC', // Sort in descending order
-    'paged' => get_query_var('paged'), // Get the current page number
+    'number' => $comments_per_page, // Number of comments per page
+    'paged' => $paged, // Current page number
 );
 
 $comments_query = new WP_Comment_Query;
-$comments = $comments_query->query($comments_args);
+$comments = $comments_query->query($args);
+$total_comments = wp_count_comments(null, array(
+    'status' => 'approve',
+))->approved;
+$total_pages = ceil($total_comments / $comments_per_page);
 ?>
 <section id="comment" class="bg-gray-100 shadow-md shadow-gray-700">
     <h3 class="mt-3 p-3 text-white bg-gray-900 text-3xl">全コメント</h3>
@@ -45,27 +51,24 @@ foreach ($comments as $key => $comment) {
 
     </div>
 
-    <!-- Manual Pagination -->
-    <div class="pagination">
-        <?php
-$total_comments = $comments_query->found_comments;
-$total_pages = ceil($total_comments / $comments_per_page);
-
+</section>
+<!-- Pagination -->
+<?php
 if ($total_pages > 1) {
-    echo '<div class="pagination-links">';
-
-    for ($i = 1; $i <= $total_pages; $i++) {
-        $current_class = ($i == $paged) ? 'current' : '';
-        $pagination_link = get_permalink() . 'page/' . $i . '/';
-        echo '<a href="' . $pagination_link . '" class="' . $current_class . '">' . $i . '</a>';
-    }
-
+    echo '<div class="mt-4 text-xl font-semibold text-shadow-lg">';
+    echo paginate_links(array(
+        'base' => get_pagenum_link(1) . '%_%',
+        'format' => 'page/%#%',
+        'current' => $paged,
+        'total' => $total_pages,
+        'prev_text' => __('&laquo; Previous'),
+        'next_text' => __('Next &raquo;'),
+        'before_page_number' => '<span class="page-number">',
+        'after_page_number' => '</span>',
+    ));
     echo '</div>';
 }
 ?>
-    </div>
-</section>
-
 <?php
 get_footer();
 ?>

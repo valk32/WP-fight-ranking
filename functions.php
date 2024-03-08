@@ -242,3 +242,48 @@ function custom_comment_redirect($location)
     return $location;
 }
 add_filter('comment_post_redirect', 'custom_comment_redirect');
+
+// Register a shortcode to display the form
+function custom_contact_form_shortcode()
+{
+    ob_start();
+    ?>
+<form method="POST">
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <br>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+<?php
+return ob_get_clean();
+}
+add_shortcode('custom_contact_form', 'custom_contact_form_shortcode');
+
+// Handle form submission
+function custom_contact_form_submit()
+{
+    if (isset($_POST['name']) && isset($_POST['email'])) {
+        $name = sanitize_text_field($_POST['name']);
+        $email = sanitize_email($_POST['email']);
+
+        // Set email headers
+        $headers = array(
+            'Content-Type: text/html; charset=UTF-8',
+        );
+
+        // Set email subject and content
+        $subject = 'New Form Submission';
+        $message = 'Name: ' . $name . '<br>';
+        $message .= 'Email: ' . $email;
+
+        // Set the recipient email address
+        $to = 'valkyrie12240@gmail.com';
+
+        // Send the email
+        wp_mail($to, $subject, $message, $headers);
+    }
+}
+add_action('init', 'custom_contact_form_submit');

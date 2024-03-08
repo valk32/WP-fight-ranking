@@ -159,5 +159,5 @@
             </div>
         </div>
     </nav>
-    <main class="px-4 py-36 bg-auto bg-cover bg-center min-h-[90vh] " style="background-image: url('')">
+    <main class="px-4 py-36 bg-auto bg-cover bg-center min-h-[92vh] " style="background-image: url('')">
         <div class="w-[600px] mx-auto">

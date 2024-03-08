@@ -14,7 +14,8 @@ get_header();
     <?php
 $args = array(
     'post_type' => 'match',
-    'posts_per_page' => 10, // Number of posts to retrieve
+    'posts_per_page' => 2, // Number of posts to retrieve
+    'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
     'orderby' => 'date', // Order by numeric value
     'order' => 'DESC', // Sort in ascending order
 );
@@ -172,6 +173,20 @@ if ($custom_query->have_posts()) {
     </div>
     <?php
 }
+
+// Pagination
+    $total_pages = $custom_query->max_num_pages;
+    if ($total_pages > 1) {
+        $current_page = max(1, get_query_var('paged'));
+        echo '<div class="text-xl font-semibold text-shadow-lg">';
+        echo paginate_links(array(
+            'base' => add_query_arg('paged', '%#%'),
+            'format' => '', // URL structure for pagination links
+            'current' => $current_page,
+            'total' => $total_pages,
+        ));
+        echo '</div>';
+    }
 }
 
 // Restore the global post data

@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Comments
+Template Name: HOME
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -8,6 +8,7 @@ if (!defined('ABSPATH')) {
 
 get_header();
 ?>
+
 <?php
 $args = array(
     'post_type' => 'playerinfo',
@@ -144,22 +145,10 @@ foreach ($comments as $key => $comment) {
     </div>
 </section>
 <section id="request" class="mt-4 shadow-md shadow-gray-700">
-    <h3 class="mt-3 p-3 text-white bg-gray-900 text-3xl">
-    </h3>
-    <div class="px-3 py-2 bg-white text-2xl text-center">
-        <div>
-            <input type="text"
-                class="w-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                placeholder="おくのたかし" required />
-            vs
-            <input type="text"
-                class="w-28 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5"
-                placeholder="中岸風太" required />が見たい！
-        </div>
-        <button class="px-3 py-2 mt-2 bg-gray-900 text-white rounded-md text-sm">
-            <i class="fa fa-send"></i> 転送
-        </button>
-    </div>
+
+    <?php
+the_content();
+?>
 </section>
 
 <?php
