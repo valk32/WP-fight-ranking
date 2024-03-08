@@ -77,11 +77,11 @@ foreach ($output as $group) {
         echo '<div class="w-full bg-gray-900 text-white p-2 text-center">' . $content['name'] . ' (' . $content['age'] . ')</div>';
         echo '<img class="absolute top-1 left-1 rounded-full w-12 h-12 text-center text-white" src="';
         if ($key == 0) {
-            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge1.png';
+            echo '/fight-ranking/wp-content/uploads/2024/03/badge1.png';
         } elseif ($key == 1) {
-            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge2.png';
+            echo '/fight-ranking/wp-content/uploads/2024/03/badge2.png';
         } elseif ($key == 2) {
-            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge3.png';
+            echo '/fight-ranking/wp-content/uploads/2024/03/badge3.png';
         } else {
             echo '';
         }

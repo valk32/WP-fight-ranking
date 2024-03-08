@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 get_header();
 ?>
 <?php
-$comments_per_page = 2; // Number of comments per page
+$comments_per_page = 10; // Number of comments per page
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1; // Get the current page number
 $args = array(
     'status' => 'approve', // Only approved comments

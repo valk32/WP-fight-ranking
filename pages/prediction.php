@@ -14,7 +14,7 @@ get_header();
     <?php
 $args = array(
     'post_type' => 'match',
-    'posts_per_page' => 2, // Number of posts to retrieve
+    'posts_per_page' => 10, // Number of posts to retrieve
     'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
     'orderby' => 'date', // Order by numeric value
     'order' => 'DESC', // Sort in ascending order
@@ -59,9 +59,9 @@ if ($custom_query->have_posts()) {
             $img2 = wp_get_attachment_url(get_post_meta(get_the_ID(), 'img', true));
             wp_reset_postdata();
         }?>
-    <div class=" my-8 relative flex justify-evenly w-[700px] items-center bg-white border border-gray-200 rounded-lg
-        shadow bg-gray-200 bg-opacity-70 transition-all duration-500">
-        <div style="background-image: url('http://localhost/fight-ranking/wp-content/uploads/2024/03/VS1.jpg')"
+    <div
+        class=" my-8 relative flex justify-evenly w-[700px] items-center bg-white rounded-lg transition-all duration-500">
+        <div style="background-image: url('/fight-ranking/wp-content/uploads/2024/03/VS1.jpg')"
             class="relative p-8 w-full max-w-2xl max-h-full bg-auto bg-cover bg-center rounded-lg shadow">
             <!-- Modal content -->
             <div class="flex justify-around items-center ">
