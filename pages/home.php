@@ -74,17 +74,17 @@ foreach ($output as $group) {
         echo '<img src="' . $content['img'] . '" class="h-[180px] w-full object-cover" alt="" />';
         echo '<div class="w-full bg-blue-600 text-white text-center"><i class="fa fa-thumbs-up"></i>' . $content['vote'] . '</div>';
         echo '<div class="w-full bg-gray-900 text-white p-2 text-center">' . $content['name'] . ' (' . $content['age'] . ')</div>';
-        echo '<div class="absolute top-2 left-2 rounded-full w-7 h-7 text-center ';
+        echo '<img class="absolute top-1 left-1 rounded-full w-12 h-12 text-center text-white" src="';
         if ($key == 0) {
-            echo 'bg-yellow-400';
+            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge1.png';
         } elseif ($key == 1) {
-            echo 'bg-gray-400';
+            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge2.png';
         } elseif ($key == 2) {
-            echo 'bg-yellow-800';
+            echo 'http://localhost/fight-ranking/wp-content/uploads/2024/03/badge3.png';
         } else {
-            echo 'bg-gray-800';
+            echo '';
         }
-        echo ' text-white border-2 border-white">' . $key + 1 . '</div>';
+        echo '"></img>';
         echo '</a>';
     }
 

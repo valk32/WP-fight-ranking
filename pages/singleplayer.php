@@ -40,7 +40,8 @@ $comments = get_comments(array(
         <div class="p-2">
             <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
         </div>
-        <div class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center rounded-xl shadow-md shadow-gray-400">
+        <div
+            class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center  bg-gray-200  rounded-xl shadow-md shadow-gray-400">
             <div class="">
                 <h4 class="mr-2">氏名</h4>
                 <p>ランク</p>
@@ -80,11 +81,11 @@ $comments = get_comments(array(
     <?php
 foreach ($comments as $key => $comment) {
 
-    echo '<div class="flex items-center p-2 hover:cursor-pointer hover:bg-gray-200 transition-all duration-500" onclick="">';
+    echo '<div class="flex items-center p-2 hover:cursor-pointer transition-all duration-500" onclick="">';
     echo '<div class="mx-2">';
     echo '<img src="' . $img . '" class="w-24 h-full rounded-md border-3 border-gray-100" />';
     echo '</div>';
-    echo '<div class="p-1 mx-2 flex-1 break-all">';
+    echo '<div class="p-3 mx-2 flex-1 break-all bg-gray-200 hover:bg-gray-300 rounded-md ">';
     echo '<h3 class="font-bold"></h3>';
     echo '<p href="#">' . $comment->comment_content . '</p>';
     echo '<p class="text-sm"> ';
@@ -101,7 +102,6 @@ foreach ($comments as $key => $comment) {
 <?php
 comment_form();
 ?>
-
 
 
 
