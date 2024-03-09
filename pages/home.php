@@ -130,7 +130,7 @@ foreach ($comments as $key => $comment) {
     echo '<h3 class="font-bold"></h3>';
     echo '<p href="#">' . $comment->comment_content . '</p>';
     echo '<p class="text-sm"> ';
-    echo $comment->comment_author_email;
+    echo $comment->comment_author;
     echo ' </p><p>' . $comment->comment_date . ' </p>';
     echo '</div>';
     echo '<hr class="mx-2 text-bg-gray-800">';

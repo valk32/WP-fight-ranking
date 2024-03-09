@@ -80,7 +80,7 @@ $comments = get_comments(array(
 
     <?php
 foreach ($comments as $key => $comment) {
-
+    print_r($comment);
     echo '<div class="flex items-center p-2 hover:cursor-pointer transition-all duration-500" onclick="">';
     echo '<div class="mx-2">';
     echo '<img src="' . $img . '" class="w-24 h-full rounded-md border-3 border-gray-100" />';
@@ -89,13 +89,13 @@ foreach ($comments as $key => $comment) {
     echo '<h3 class="font-bold"></h3>';
     echo '<p href="#">' . $comment->comment_content . '</p>';
     echo '<p class="text-sm"> ';
-    echo $comment->comment_author_email;
+    echo $comment->comment_author;
     echo ' </p><p>' . $comment->comment_date . ' </p>';
     echo '</div>';
-    echo '<hr class="mx-2 text-bg-gray-800">';
+    echo '<hr class="mx-2 text-gray-800">';
     echo '</div>';
 
-    echo '<hr class="mx-2 text-bg-gray-800">';
+    echo '<hr class="mx-2 text-gray-800">';
 }
 ?>
 </section>

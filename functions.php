@@ -190,11 +190,11 @@ add_filter('themeisle_sdk_enable_telemetry', '__return_true');
 function custom_comment_form_fields($fields)
 {
     // Remove the author, email, and URL fields
-    unset($fields['author']);
+    // unset($fields['author']);
     unset($fields['email']);
     unset($fields['url']);
     // Modify the comment field attributes as needed
-    $fields['comment_field'] = '<textarea name="comment" id="comment" cols="45" rows="3" class="p-3 bg-gray-300 border-3 border-gray-800" required></textarea>';
+    //$fields['comment_field'] = '<textarea name="comment" id="comment" cols="45" rows="3" class="p-3 bg-gray-300 border-3 border-gray-800" required></textarea>';
 
     return $fields;
 }
@@ -216,8 +216,11 @@ function custom_comment_form_defaults($defaults)
     $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-xl bg-gray-900">
                 コメントを残す
             </div>';
+    $defaults['author'] = '<input type="text" name="author" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
+    // $defaults['email'] = '<input type="text" name="email" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
     $defaults['comment_field'] = '<textarea name="comment" id="comment" cols="45" rows="3" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required></textarea>';
     $defaults['fields']['redirect_to'] = '<input type="hidden" name="redirect_to" value="' . esc_url(get_permalink()) . '" />';
+    unset($defaults['fields']['email']);
 
     return $defaults;
 }
