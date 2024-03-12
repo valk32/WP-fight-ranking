@@ -16,17 +16,19 @@ $name = get_post_meta($playerID, 'name', true);
 $age = get_post_meta($playerID, 'age', true);
 $rank = get_post_meta($playerID, 'rank', true);
 $vote = get_post_meta($playerID, 'vote', true);
-$weight = get_post_meta($playerID, 'weight', true);
-$org = get_post_meta($playerID, 'org', true);
+$weight = get_post_meta(get_post_meta($playerID, 'weight', true), 'weightname', true);
+$org = get_post_meta(get_post_meta($playerID, 'org', true), 'orgname', true);
 $record = get_post_meta($playerID, 'record', true);
 $img = wp_get_attachment_url(get_post_meta($playerID, 'img', true)); //     }
 
-$comments = get_comments(array(
-    'post_id' => $playerID,
-    'status' => 'approve', // Retrieve only approved comments
-    'oderby' => 'date',
-    'order' => 'DESC', // Order comments in ascending order by time
-));
+$comments = get_comments(
+    array(
+        'post_id' => $playerID,
+        'status' => 'approve', // Retrieve only approved comments
+        'oderby' => 'date',
+        'order' => 'DESC', // Order comments in ascending order by time
+    )
+);
 // Restore the global post data
 ?>
 
@@ -61,13 +63,27 @@ $comments = get_comments(array(
                 <p>:</p>
             </div>
             <div class="flex-1 ">
-                <h4 class="font-semibold"><?php echo $name; ?></h4>
-                <p><?php echo $rank; ?></p>
-                <p><?php echo $age; ?></p>
-                <p><i class="fa fa-thumbs-up"></i> <?php echo $vote; ?></p>
-                <p> <?php echo $record; ?></p>
-                <p> <?php echo $weight; ?></p>
-                <p> <?php echo $org; ?></p>
+                <h4 class="font-semibold">
+                    <?php echo $name; ?>
+                </h4>
+                <p>
+                    <?php echo $rank; ?>
+                </p>
+                <p>
+                    <?php echo $age; ?>
+                </p>
+                <p><i class="fa fa-thumbs-up"></i>
+                    <?php echo $vote; ?>
+                </p>
+                <p>
+                    <?php echo $record; ?>
+                </p>
+                <p>
+                    <?php echo $weight; ?>
+                </p>
+                <p>
+                    <?php echo $org; ?>
+                </p>
             </div>
             <form method="POST" action="/fight-ranking/vote">
                 <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
@@ -79,25 +95,24 @@ $comments = get_comments(array(
     </div>
 
     <?php
-foreach ($comments as $key => $comment) {
-    print_r($comment);
-    echo '<div class="flex items-center p-2 hover:cursor-pointer transition-all duration-500" onclick="">';
-    echo '<div class="mx-2">';
-    echo '<img src="' . $img . '" class="w-24 h-full rounded-md border-3 border-gray-100" />';
-    echo '</div>';
-    echo '<div class="p-3 mx-2 flex-1 break-all bg-gray-200 hover:bg-gray-300 rounded-md ">';
-    echo '<h3 class="font-bold"></h3>';
-    echo '<p href="#">' . $comment->comment_content . '</p>';
-    echo '<p class="text-sm"> ';
-    echo $comment->comment_author;
-    echo ' </p><p>' . $comment->comment_date . ' </p>';
-    echo '</div>';
-    echo '<hr class="mx-2 text-gray-800">';
-    echo '</div>';
+    foreach ($comments as $key => $comment) {
+        echo '<div class="flex items-center p-2 hover:cursor-pointer transition-all duration-500" onclick="">';
+        echo '<div class="mx-2">';
+        echo '<img src="' . $img . '" class="w-24 h-full rounded-md border-3 border-gray-100" />';
+        echo '</div>';
+        echo '<div class="p-3 mx-2 flex-1 break-all bg-gray-200 hover:bg-gray-300 rounded-md ">';
+        echo '<h3 class="font-bold"></h3>';
+        echo '<p href="#">' . $comment->comment_content . '</p>';
+        echo '<p class="text-sm"> ';
+        echo $comment->comment_author;
+        echo ' </p><p>' . $comment->comment_date . ' </p>';
+        echo '</div>';
+        echo '<hr class="mx-2 text-gray-800">';
+        echo '</div>';
 
-    echo '<hr class="mx-2 text-gray-800">';
-}
-?>
+        echo '<hr class="mx-2 text-gray-800">';
+    }
+    ?>
 </section>
 <?php
 comment_form();
@@ -105,4 +120,4 @@ comment_form();
 
 
 
-<?php get_footer();?>
+<?php get_footer(); ?>

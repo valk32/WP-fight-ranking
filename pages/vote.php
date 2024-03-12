@@ -24,25 +24,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['player_id'])) {
     header("Location: " . $_SERVER['HTTP_REFERER']);
     exit();
 } else
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['match_id'])) {
-    // Get the player ID from the form submission
-    $matchID = $_POST['match_id'];
-    $vote_hand = $_POST['vote_hand'];
-    // Perform any necessary validation and security checks here
-    if (isset($_SESSION['voted'][$matchID])) {
-        echo "You have already voted for this match.";
-    } else {
-        // Process the vote and store the information
-        $_SESSION['voted'][$matchID] = $voteHand;
-        // Update the vote field of the player
-        update_match_vote($matchID, $vote_hand);
-    }
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['match_id'])) {
+        // Get the player ID from the form submission
+        $matchID = $_POST['match_id'];
+        $vote_hand = $_POST['vote_hand'];
+        // Perform any necessary validation and security checks here
+        if (isset($_SESSION['matchvoted'][$matchID])) {
+            echo "You have already voted for this match.";
+        } else {
+            // Process the vote and store the information
+            $_SESSION['matchvoted'][$matchID] = $voteHand + 1;
+            // Update the vote field of the player
+            update_match_vote($matchID, $vote_hand);
+        }
 
-    // Redirect the user or display a success message
-    // For example, redirect back to the previous page
-    header("Location: " . $_SERVER['HTTP_REFERER']);
-    exit();
-}
+        // Redirect the user or display a success message
+        // For example, redirect back to the previous page
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        exit();
+    }
 // Function to update the vote field in the playerinfo post
 function update_player_vote($playerId)
 {

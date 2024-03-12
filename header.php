@@ -36,24 +36,28 @@
                         <div id="dropdownNavbar1"
                             class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
                             <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN"
-                                        onclick="localStorage.setItem('rankPage', 'rizinRank')"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        RIZIN編 </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1"
-                                        onclick="localStorage.setItem('rankPage', 'k1Rank')"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        K-1 編</a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=Breakingdown"
-                                        onclick="localStorage.setItem('rankPage', 'breakingDown')"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        ブレイキングダウン編 </a>
-                                </li>
+                                <?php
+                                $args = array(
+                                    'post_type' => 'orgtype',
+                                    'posts_per_page' => -1, // Number of posts to retrieve
+                                    'order' => 'ASC',
+                                );
+
+                                $custom_query = new WP_Query($args);
+                                if ($custom_query->have_posts()) {
+                                    while ($custom_query->have_posts()) {
+                                        $custom_query->the_post();
+                                        $orgID = get_the_ID();
+                                        ?>
+
+                                        <li>
+                                            <a href="/fight-ranking/requestcard?orgt=<?php echo $orgID ?>"
+                                                class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
+                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>編
+                                            </a>
+                                        </li>
+                                    <?php }
+                                } ?>
                             </ul>
                         </div>
                     </li>
@@ -68,93 +72,72 @@
                         </a>
                     </li>
                     <li>
-                        <button id="dropdownNavbarLink3" data-dropdown-toggle="dropdownNavbar3"
+                        <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2"
                             class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
-                            aria-current="page" onclick="localStorage.setItem('org', 'rizinRank')">
-                            RIZIN総選挙
-                            <i class="fa fa-angle-down" aria-hidden="true">
-                            </i>
+                            aria-current="page">
+                            総選挙
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
-                        <div id="dropdownNavbar3"
+                        <div id="dropdownNavbar2"
                             class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
                             <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN&weighttype=フライ級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        フライ級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN&weighttype=バンタム級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        バンタム級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN&weighttype=フェザー級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        フェザー級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN&weighttype=ライト級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        ライト級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=RIZIN&weighttype=ヘビー級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        ヘビー級
-                                    </a>
-                                </li>
+                                <?php
+                                $args = array(
+                                    'post_type' => 'orgtype',
+                                    'posts_per_page' => -1, // Number of posts to retrieve
+                                    'order' => 'ASC',
+                                );
+
+                                $custom_query = new WP_Query($args);
+                                if ($custom_query->have_posts()) {
+                                    while ($custom_query->have_posts()) {
+                                        $custom_query->the_post();
+                                        $orgID = get_the_ID();
+                                        ?>
+                                        <li class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
+                                            <button id="dropdownNavbarLink<?php echo $orgID ?>"
+                                                data-dropdown-toggle="dropdownNavbar<?php echo $orgID ?>"
+                                                class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
+                                                aria-current="page">
+                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>総選挙
+                                                <i class="fa fa-angle-down" aria-hidden="true">
+                                                </i>
+                                            </button>
+                                            <div id="dropdownNavbar<?php echo $orgID ?>"
+                                                class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
+                                                <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
+                                                    <?php
+                                                    $inner_args = array(
+                                                        'post_type' => 'weighttype',
+                                                        'posts_per_page' => -1, // Number of posts to retrieve
+                                                        'orderby' => 'DESC',
+                                                    );
+
+                                                    $inner_query = new WP_Query($inner_args);
+                                                    if ($inner_query->have_posts()) {
+                                                        while ($inner_query->have_posts()) {
+                                                            $inner_query->the_post();
+                                                            $weightID = get_the_ID();
+                                                            ?>
+                                                            <li>
+                                                                <a href="/fight-ranking/rank/?ranktype=<?php echo $orgID ?>&weightt=<?php echo $weightID ?>"
+                                                                    class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
+                                                                    <?php echo get_post_meta($weightID, 'weightname', true) ?>
+                                                                </a>
+                                                            <?php }
+                                                    } ?>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    <?php }
+                                    wp_reset_postdata();
+                                }
+                                ?>
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <button id="dropdownNavbarLink4" data-dropdown-toggle="dropdownNavbar4"
-                            class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
-                            aria-current="page" onclick="localStorage.setItem('org', 'k1Rank')">
-                            K-1総選挙
-                            <i class="fa fa-angle-down" aria-hidden="true">
-                            </i>
-                        </button>
-                        <div id="dropdownNavbar4"
-                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
-                            <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1&weighttype=フライ級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        フライ級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1&weighttype=バンタム級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        バンタム級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1&weighttype=フェザー級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        フェザー級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1&weighttype=ライト級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        ライト級
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="/fight-ranking/rank?ranktype=K-1&weighttype=ヘビー級"
-                                        class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                        ヘビー級
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+
                 </ul>
             </div>
         </div>
