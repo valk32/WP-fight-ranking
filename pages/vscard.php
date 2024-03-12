@@ -101,7 +101,7 @@ get_header();
                         <form method="POST" action="/fight-ranking/vote">
                             <input type="hidden" name="player_id" value="<?php echo $matchID ?>">
                             <button
-                                class="w-36 mt-3 mx-auto text-center rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 transition-all duration-500">
+                                class="w-36 mt-3 mx-auto text-center rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900  ">
                                 実現したい(
                                 <?php echo $vote ?>)
                             </button>
@@ -123,7 +123,7 @@ get_header();
                                  echo '-8rem';
                              }
                              ?>)] min-w-32 mt-3 inline text-center rounded-md text-gray-100 bg-red-800 p-2 shadow-md shadow-gray-700
-            hover:bg-gray-100 hover:text-gray-900 transition-all duration-500">
+            hover:bg-gray-100 hover:text-gray-900  ">
                             <?php echo $name1 ?>(
                             <?php echo number_format($percent1, 1) ?>%)
                         </button>
@@ -136,7 +136,7 @@ get_header();
                              }
                              ?>)] min-w-32 inline text-center rounded-md
                         text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900
-                        transition-all duration-500">
+                         ">
                             <?php echo $name2 ?>(
                             <?php echo number_format($percent2, 1) ?>%)
                         </button>

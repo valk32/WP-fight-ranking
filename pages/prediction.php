@@ -54,20 +54,19 @@ get_header();
             }
             $name1 = get_post_meta($player1, 'name', true);
             $name2 = get_post_meta($player2, 'name', true);
+            $record1 = get_post_meta($player1, 'record', true);
+            $record2 = get_post_meta($player2, 'record', true);
             $img1 = wp_get_attachment_url(get_post_meta($player1, 'img', true));
             $img2 = wp_get_attachment_url(get_post_meta($player2, 'img', true));
             ?>
             <div
-                class=" my-8 relative flex justify-evenly w-[700px] items-center text-gray-900 bg-white rounded-lg transition-all duration-500">
-                <div class="relative p-8 w-full max-w-2xl max-h-full bg-gray-200 rounded-lg shadow">
+                class="my-8 relative justify-evenly w-[700px] items-center text-gray-900 rounded-lg shadow-md shadow-gray-700 transition-all duration-500">
+                <div class="px-1 py-3 w-full max-h-full bg-gray-200 rounded-lg shadow">
                     <div class="flex justify-around items-center ">
                         <div class="w-1/3">
-                            <h5 class="text-2xl text-center font-semibold">
-                                <?php echo $name1 ?>
-                            </h5>
                             <img data-modal-target="modal1<?php echo $matchID ?>"
                                 data-modal-toggle="modal1<?php echo $matchID ?>" src="<?php echo $img1 ?>"
-                                class="mx-auto my-2 w-44 h-48 rounded-full hover:animate-pulse hover:cursor-pointer duration-500"
+                                class="mx-auto my-2 w-44 h-48 rounded-md hover:animate-pulse hover:cursor-pointer duration-500"
                                 alt="">
                             <div id="modal1<?php echo $matchID ?>" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -107,16 +106,19 @@ get_header();
                                 </div>
                             </div>
                         </div>
-                        <div class="w-1/4">
+                        <div class="flex flex-col w-1/4">
+                            <h5 class="text-2xl text-center font-semibold">
+                                <?php echo $name1 ?>
+                            </h5>
                             <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="h-24 w-24 mx-auto">
-                        </div>
-                        <div class="w-1/3">
                             <h5 class="text-2xl text-center font-semibold">
                                 <?php echo $name2 ?>
                             </h5>
+                        </div>
+                        <div class="w-1/3">
                             <img data-modal-target="modal2<?php echo $matchID ?>"
                                 data-modal-toggle="modal2<?php echo $matchID ?>" src="<?php echo $img2 ?>"
-                                class="mx-auto my-2 w-44 h-48 rounded-full hover:animate-pulse hover:cursor-pointer duration-500"
+                                class="mx-auto my-2 w-44 h-48 rounded-md hover:animate-pulse hover:cursor-pointer duration-500"
                                 alt="">
                             <div id="modal2<?php echo $matchID ?>" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -157,28 +159,41 @@ get_header();
                             </div>
                         </div>
                     </div>
-                    <div class="text-center my-2 text-3xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                        現在の勝敗予想結果
+                    <div class="flex relative justify-between px-14">
+                        <h5 class="text-xl">
+                            戦績
+                            <?php echo $record1 ?>
+                        </h5>
+                        <h4 class="text-center my-1 text-3xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">現在の勝敗予想結果
+                        </h4>
+                        <h5 class="text-xl">
+                            戦績
+                            <?php echo $record2 ?>
+                        </h5>
                     </div>
-                    <div class="w-full flex">
+                    <div class="w-full flex justify-center">
                         <div
                             class="w-[calc(<?php echo $percent1 ?>%<?php if ($percent1 == 100) {
                                    echo '-8rem';
                                }
-                               ?>)] min-w-24 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-xl text-gray-200 font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                            <?php echo number_format($percent1, 1) ?>%
+                               ?>)] min-w-28 text-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-xl text-gray-200 font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <?php echo $vote1 ?>(
+                            <?php echo number_format($percent1, 1) ?>%)
                         </div>
                         <div class="w-[calc(<?php echo $percent2 ?>%<?php if ($percent2 == 100) {
                                echo '-8rem';
                            }
-                           ?>)] min-w-24 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  text-xl text-gray-200 font-bold
+                           ?>)] min-w-28 text-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%  text-xl text-gray-200 font-bold
                         drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
-                            <?php echo number_format($percent2, 1) ?>%
+                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <?php echo $vote2 ?>(
+                            <?php echo number_format($percent2, 1) ?>%)
                         </div>
                     </div>
                 </div>
                 <div
-                    class="-top-5 w-56 text-center font-semibold rounded-3xl absolute bg-gray-200 p-2 shadow-md shadow-gray-700 hover:bg-white  transition-all duration-500">
+                    class="-top-5 w-56 left-1/2 -translate-x-1/2 text-center font-semibold rounded-3xl absolute bg-gray-200 p-2 shadow-md shadow-gray-700 hover:bg-white">
                     <?php echo $type . '(' . (new DateTime($date))->format("Y-m-d") . ')'; ?>
                 </div>
             </div>

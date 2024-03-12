@@ -131,7 +131,7 @@ wp_reset_postdata();
 
         echo '</div>';
         echo '<a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '"
-        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white  transition-all duration-500">';
+        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white   ">';
         echo '夢の対戦カード 総合ランキング1〜3位 ' . get_post_meta($group['org'], 'orgname', true);
         echo '</a>';
         echo '</div>';
@@ -163,7 +163,7 @@ wp_reset_postdata();
 
             $img_url = wp_get_attachment_url(get_post_meta($comment->comment_post_ID, 'img', true));
 
-            echo '<div class="flex items-center p-2 hover:cursor-pointer hover:bg-gray-200 transition-all duration-500" onclick="">';
+            echo '<div class="flex items-center p-2 hover:cursor-pointer hover:bg-gray-200  " onclick="">';
             echo '<div class="mx-2">';
             echo '<img src="' . $img_url . '" class="w-24 rounded-md border-3 border-gray-100" />';
             echo '</div>';

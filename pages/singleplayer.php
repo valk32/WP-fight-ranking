@@ -38,7 +38,7 @@ $comments = get_comments(
         <?php echo $name; ?>選手の個人情報
     </div>
 
-    <div onclick="" class="mx-1 my-3 flex items-center relative transition-all duration-500">
+    <div onclick="" class="mx-1 my-3 flex items-center relative  ">
         <div class="p-2">
             <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
         </div>
@@ -96,7 +96,7 @@ $comments = get_comments(
 
     <?php
     foreach ($comments as $key => $comment) {
-        echo '<div class="flex items-center p-2 hover:cursor-pointer transition-all duration-500" onclick="">';
+        echo '<div class="flex items-center p-2 hover:cursor-pointer  " onclick="">';
         echo '<div class="mx-2">';
         echo '<img src="' . $img . '" class="w-24 h-full rounded-md border-3 border-gray-100" />';
         echo '</div>';
