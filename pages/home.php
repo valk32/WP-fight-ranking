@@ -66,6 +66,8 @@ wp_reset_postdata();
         echo '<div id="' . $group['org'] . '" class="flex justify-center mx-auto"></div>';
         echo '<div class="flex flex-col gap-1">';
         foreach ($group['content'] as $key => $content) {
+            if ($key > 2)
+                continue;
             ?>
             <div
                 class="relative flex justify-around w-full items-center p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
