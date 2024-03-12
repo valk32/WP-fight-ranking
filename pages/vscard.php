@@ -64,7 +64,9 @@ get_header();
                 class="my-8 w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition-all duration-500">
                 <div class=" flex justify-around w-full  items-center ">
                     <div class="flex flex-col items-center">
-                        <img src="<?php echo $img1 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                        <a href="/fight-ranking/person?pid=<?php echo $player1 ?>">
+                            <img src="<?php echo $img1 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                        </a>
                     </div>
                     <div class="flex flex-col justify-between">
                         <div class="flex flex-1">
@@ -108,7 +110,9 @@ get_header();
                     </div>
 
                     <div class="flex flex-col items-center">
-                        <img src="<?php echo $img2 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                        <a href="/fight-ranking/person?pid=<?php echo $player2 ?>">
+                            <img src="<?php echo $img2 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                        </a>
                     </div>
                 </div>
                 <div class="w-full text-center">

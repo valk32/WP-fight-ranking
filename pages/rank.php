@@ -56,7 +56,9 @@ get_header();
 
             <div class="mx-1 my-3 flex items-center relative transition-all duration-500">
                 <div class="p-2">
-                    <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="">
+                    <a href="/fight-ranking/person?pid=<?php echo $playerID ?>">
+                        <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="">
+                    </a>
                 </div>
                 <div
                     class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center bg-gray-200 bg-opacity-70 rounded-xl shadow-md shadow-gray-400">

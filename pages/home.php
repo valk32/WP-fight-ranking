@@ -70,8 +70,10 @@ wp_reset_postdata();
             <div
                 class="relative flex justify-around w-full items-center p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
                 <div class="flex flex-2 items-center gap-4">
-                    <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player1'], 'img', true)) ?>"
-                        class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                    <a href="/fight-ranking/person?pid=<?php echo $content['player1'] ?>">
+                        <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player1'], 'img', true)) ?>"
+                            class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                    </a>
                 </div>
                 <div class="flex flex-col justify-between">
                     <div class="flex flex-1">
@@ -106,8 +108,10 @@ wp_reset_postdata();
                 </div>
 
                 <div class="flex flex-2 items-center gap-4 justify-end">
-                    <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player2'], 'img', true)) ?>"
-                        class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                    <a href="/fight-ranking/person?pid=<?php echo $content['player2'] ?>">
+                        <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player2'], 'img', true)) ?>"
+                            class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                    </a>
                 </div>
 
                 <img class="absolute top-1 left-1 rounded-full w-12 h-12 text-center text-white" src="
