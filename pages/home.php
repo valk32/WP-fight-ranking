@@ -14,7 +14,7 @@ $args = array(
     'post_type' => 'vsrequest',
     'posts_per_page' => -1, // Retrieve all posts
     'orderby' => 'meta_value', // Order by meta value
-    'meta_key' => 'vote', // Custom field key for the date
+    'meta_key' => 'requestmatchvote', // Custom field key for the date
     'order' => 'DESC', // Sort in ascending order
 );
 
@@ -77,35 +77,17 @@ wp_reset_postdata();
                             class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
                     </a>
                 </div>
-                <div class="flex flex-col justify-between">
-                    <div class="flex flex-1">
-                        <div class="flex flex-col text-center gap-2">
-                            <p>
-                                <?php echo get_post_meta($content['player1'], 'name', true) ?>
-                            </p>
-                            <p>
-                                <?php echo get_post_meta($content['player1'], 'rank', true) ?>
-                            </p>
-                            <p>
-                                <?php echo get_post_meta($content['player1'], 'record', true) ?>
-                            </p>
+                <div class="flex flex-1 flex-col justify-between">
+                    <div class="flex flex-col flex-1">
+                        <p class="text-2xl font-bold text-left ml-6">
+                            <?php echo get_post_meta($content['player1'], 'name', true) ?>
+                        </p>
+                        <div class="mx-auto text-red-500">
+                            <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="w-16 h-16" />
                         </div>
-                        <div class="flex flex-col text-center gap-2 text-red-500">
-                            <p>氏名</p>
-                            <p>ランク</p>
-                            <p>戦績</p>
-                        </div>
-                        <div class="flex flex-col text-center gap-2">
-                            <p>
-                                <?php echo get_post_meta($content['player2'], 'name', true) ?>
-                            </p>
-                            <p>
-                                <?php echo get_post_meta($content['player2'], 'rank', true) ?>
-                            </p>
-                            <p>
-                                <?php echo get_post_meta($content['player2'], 'record', true) ?>
-                            </p>
-                        </div>
+                        <p class="text-2xl font-bold text-right mr-6">
+                            <?php echo get_post_meta($content['player2'], 'name', true) ?>
+                        </p>
                     </div>
                 </div>
 
@@ -130,12 +112,16 @@ wp_reset_postdata();
             </div>
             <?php
         }
-
         echo '</div>';
         echo '<a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '"
-        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white   ">';
+        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white">';
         echo '夢の対戦カード 総合ランキング1〜3位 ' . get_post_meta($group['org'], 'orgname', true);
         echo '</a>';
+        echo '<div class="flex justify-center">
+        <button class="mt-4 p-2 bg-gray-900 text-white rounded-md hover:opacity-80">
+            <a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '" class="text-sm">もっと見る <i class="fa fa-arrow-circle-right"></i></a>
+        </button>
+    	</div>';
         echo '</div>';
     }
     ?>

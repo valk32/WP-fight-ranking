@@ -61,12 +61,17 @@ get_header();
             ?>
             <div
                 class="my-8 relative justify-evenly w-[700px] items-center text-gray-900 rounded-lg shadow-md shadow-gray-700 transition-all duration-500">
-                <div class="px-1 py-3 w-full max-h-full bg-gray-200 rounded-lg shadow">
+                <div style="background-image: url('/fight-ranking/wp-content/uploads/2024/03/VS1.jpg')"
+                    class="px-1 py-5 w-full max-h-full bg-cover bg-center rounded-lg shadow">
+                    <!-- Modal content -->
                     <div class="flex justify-around items-center ">
                         <div class="w-1/3">
+                            <h5 class="text-2xl text-center text-gray-100 font-semibold">
+                                <?php echo $name1 ?>
+                            </h5>
                             <img data-modal-target="modal1<?php echo $matchID ?>"
                                 data-modal-toggle="modal1<?php echo $matchID ?>" src="<?php echo $img1 ?>"
-                                class="mx-auto my-2 w-44 h-48 rounded-md hover:animate-pulse hover:cursor-pointer duration-500"
+                                class="mx-auto w-48 h-48 rounded-full hover:animate-pulse hover:cursor-pointer duration-500 border-4 border-gray-400 border-solid"
                                 alt="">
                             <div id="modal1<?php echo $matchID ?>" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -106,19 +111,13 @@ get_header();
                                 </div>
                             </div>
                         </div>
-                        <div class="flex flex-col w-1/4">
-                            <h5 class="text-2xl text-center font-semibold">
-                                <?php echo $name1 ?>
-                            </h5>
-                            <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="h-24 w-24 mx-auto">
-                            <h5 class="text-2xl text-center font-semibold">
+                        <div class="w-1/3">
+                            <h5 class="text-2xl text-center text-gray-100 font-semibold">
                                 <?php echo $name2 ?>
                             </h5>
-                        </div>
-                        <div class="w-1/3">
                             <img data-modal-target="modal2<?php echo $matchID ?>"
                                 data-modal-toggle="modal2<?php echo $matchID ?>" src="<?php echo $img2 ?>"
-                                class="mx-auto my-2 w-44 h-48 rounded-md hover:animate-pulse hover:cursor-pointer duration-500"
+                                class="mx-auto w-48 h-48 rounded-full hover:animate-pulse hover:cursor-pointer duration-500 border-4 border-gray-400 border-solid"
                                 alt="">
                             <div id="modal2<?php echo $matchID ?>" tabindex="-1" aria-hidden="true"
                                 class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -159,19 +158,10 @@ get_header();
                             </div>
                         </div>
                     </div>
-                    <div class="flex relative justify-between px-14">
-                        <h5 class="text-xl">
-                            戦績
-                            <?php echo $record1 ?>
-                        </h5>
-                        <h4 class="text-center my-1 text-3xl font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">現在の勝敗予想結果
-                        </h4>
-                        <h5 class="text-xl">
-                            戦績
-                            <?php echo $record2 ?>
-                        </h5>
+                    <div class="text-center my-2 text-3xl text-gray-200 font-bold drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
+                        みんなの勝敗予想の結果
                     </div>
-                    <div class="w-full flex justify-center">
+                    <div class="mx-4 flex justify-center">
                         <div
                             class="w-[calc(<?php echo $percent1 ?>%<?php if ($percent1 == 100) {
                                    echo '-8rem';

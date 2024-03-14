@@ -107,17 +107,9 @@
                                                 class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
                                                 <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
                                                     <?php
-                                                    $inner_args = array(
-                                                        'post_type' => 'weighttype',
-                                                        'posts_per_page' => -1, // Number of posts to retrieve
-                                                        'orderby' => 'DESC',
-                                                    );
-
-                                                    $inner_query = new WP_Query($inner_args);
-                                                    if ($inner_query->have_posts()) {
-                                                        while ($inner_query->have_posts()) {
-                                                            $inner_query->the_post();
-                                                            $weightID = get_the_ID();
+                                                    $weighttypes = get_post_meta($orgID, 'org_weighttype', true);
+                                                    if ($weighttypes) {
+                                                        foreach ($weighttypes as $key => $weightID) {
                                                             ?>
                                                             <li>
                                                                 <a href="/fight-ranking/rank/?ranktype=<?php echo $orgID ?>&weightt=<?php echo $weightID ?>"

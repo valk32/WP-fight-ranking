@@ -21,7 +21,7 @@ get_header();
         'posts_per_page' => 10, // Number of posts to retrieve
         'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
         'orderby' => 'meta_value', // Order by meta value
-        'meta_key' => 'vote', // Custom field key for the date
+        'meta_key' => 'requestmatchvote', // Custom field key for the date
         'order' => 'DESC', // Sort in ascending order
         'meta_query' => array(
             array(
@@ -70,28 +70,28 @@ get_header();
                     </div>
                     <div class="flex flex-col justify-between">
                         <div class="flex flex-1">
-                            <div class="flex flex-col text-center gap-2 font-bold">
+                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
                                 <p>
                                     <?php echo $rank1 ?>
                                 </p>
                                 <p>
-                                    <?php echo $record1 ?>
+                                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record1) ?>
                                 </p>
                                 <p>
                                     <?php echo $vote1 ?>
                                 </p>
                             </div>
-                            <div class="flex flex-col text-center gap-2 font-bold text-red-500">
-                                <p>ランク</p>
+                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold text-red-500">
+                                <p class="truncate">ランク</p>
                                 <p>戦績</p>
                                 <p>推奨</p>
                             </div>
-                            <div class="flex flex-col text-center gap-2 font-bold">
+                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
                                 <p>
                                     <?php echo $rank2 ?>
                                 </p>
                                 <p>
-                                    <?php echo $record2 ?>
+                                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record2) ?>
                                 </p>
                                 <p>
                                     <?php echo $vote2 ?>
@@ -101,8 +101,8 @@ get_header();
                         <form method="POST" action="/fight-ranking/vote">
                             <input type="hidden" name="player_id" value="<?php echo $matchID ?>">
                             <button
-                                class="w-36 mt-3 mx-auto text-center rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900  ">
-                                実現したい(
+                                class="w-36 mt-3 mx-auto text-center rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 block">
+                                投票(
                                 <?php echo $vote ?>)
                             </button>
                         </form>
@@ -141,6 +141,10 @@ get_header();
                             <?php echo number_format($percent2, 1) ?>%)
                         </button>
                     </form>
+                </div>
+                <div class="text-center mt-2 font-semibold flex justify-evenly items-center">
+                    <i class="fa fa-arrow-up" arria-hidden=true></i><span>勝者をタップで予想</span><i class="fa fa-arrow-up"
+                        arria-hidden=true></i>
                 </div>
             </div>
             <?php

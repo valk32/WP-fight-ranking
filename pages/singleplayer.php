@@ -50,7 +50,7 @@ $comments = get_comments(
                 <p>年齢</p>
                 <p>推奨</p>
                 <p>戦績</p>
-                <p>体給</p>
+                <p> 階級</p>
                 <p>団体</p>
             </div>
             <div class="mr-2">
@@ -76,7 +76,7 @@ $comments = get_comments(
                     <?php echo $vote; ?>
                 </p>
                 <p>
-                    <?php echo $record; ?>
+                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record); ?>
                 </p>
                 <p>
                     <?php echo $weight; ?>
