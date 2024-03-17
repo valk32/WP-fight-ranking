@@ -39,7 +39,7 @@ if ($custom_query->have_posts()) {
         );
 
         // Check if the org value exists as a key in the groupedData array
-        if (isset($groupedData[$orgID])) {
+        if (isset ($groupedData[$orgID])) {
             // If the org key exists, add the post data to the content array for that org
             $groupedData[$orgID]['content'][] = $postArray;
         } else {
@@ -70,28 +70,28 @@ wp_reset_postdata();
                 continue;
             ?>
             <div
-                class="relative flex justify-around w-full items-center p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
-                <div class="flex flex-2 items-center gap-4">
+                class="relative flex justify-around w-full items-center py-10 sm:p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
+                <div class="flex items-center gap-4">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player1'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player1'], 'img', true)) ?>"
                             class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
                     </a>
                 </div>
-                <div class="flex flex-1 flex-col justify-between">
-                    <div class="flex flex-col flex-1">
-                        <p class="text-2xl font-bold text-left ml-6">
+                <div class="flex flex-col justify-between">
+                    <div class="flex flex-col flex-1 text-md md:text-2xl">
+                        <p class="font-bold text-left ml-1">
                             <?php echo get_post_meta($content['player1'], 'name', true) ?>
                         </p>
                         <div class="mx-auto text-red-500">
                             <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="w-16 h-16" />
                         </div>
-                        <p class="text-2xl font-bold text-right mr-6">
+                        <p class="font-bold text-right mr-1">
                             <?php echo get_post_meta($content['player2'], 'name', true) ?>
                         </p>
                     </div>
                 </div>
 
-                <div class="flex flex-2 items-center gap-4 justify-end">
+                <div class="flex items-center gap-4 justify-end">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player2'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player2'], 'img', true)) ?>"
                             class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
@@ -115,10 +115,10 @@ wp_reset_postdata();
         echo '</div>';
         echo '<a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '"
         class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white">';
-        echo '夢の対戦カード 総合ランキング1〜3位 ' . get_post_meta($group['org'], 'orgname', true);
-        echo '</a>';
+        echo get_post_meta($group['org'], 'orgname', true);
+        echo '<span class="hidden sm:inline"> 夢の対戦カード 投票ランキング</span></a>';
         echo '<div class="flex justify-center">
-        <button class="mt-4 p-2 bg-gray-900 text-white rounded-md hover:opacity-80">
+        <button class="mt-4 p-2 bg-gray-900 text-white rounded-md hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700">
             <a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '" class="text-sm">もっと見る <i class="fa fa-arrow-circle-right"></i></a>
         </button>
     	</div>';
@@ -168,7 +168,8 @@ wp_reset_postdata();
         ?>
     </div>
     <div class="flex justify-center">
-        <button class="my-2 p-2 bg-gray-900 text-white rounded-md hover:opacity-80">
+        <button
+            class="my-2 p-2 bg-gray-900 text-white rounded-md hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700">
             <a href="/fight-ranking/comments" class="text-sm">もっと見る <i class="fa fa-arrow-circle-right"></i></a>
         </button>
     </div>

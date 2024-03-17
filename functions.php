@@ -204,7 +204,7 @@ function custom_comment_form_submit_button($submit_button)
 {
     // Customize the submit button as needed
     $submit_button = '<button type="submit"
-                            class="p-3 py-2 mt-2 float-right bg-gray-900 hover:bg-gray-800 text-white rounded-md text-sm">
+                            class="p-3 py-2 mt-2 float-right bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md text-sm">
                             <i class="fa fa-send"></i> 転送</button>';
 
     return $submit_button;
@@ -251,24 +251,24 @@ function custom_contact_form_shortcode()
 {
     ob_start();
     ?>
-<form method="POST">
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required>
-    <br>
-    <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required>
-    <br>
-    <input type="submit" value="Submit">
-</form>
-<?php
-return ob_get_clean();
+    <form method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" required>
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+    <?php
+    return ob_get_clean();
 }
 add_shortcode('custom_contact_form', 'custom_contact_form_shortcode');
 
 // Handle form submission
 function custom_contact_form_submit()
 {
-    if (isset($_POST['name']) && isset($_POST['email'])) {
+    if (isset ($_POST['name']) && isset ($_POST['email'])) {
         $name = sanitize_text_field($_POST['name']);
         $email = sanitize_email($_POST['email']);
 

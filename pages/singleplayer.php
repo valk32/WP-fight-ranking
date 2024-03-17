@@ -8,7 +8,7 @@ get_header();
 
 <?php
 
-$pid = isset($_GET['pid']) ? $_GET['pid'] : '';
+$pid = isset ($_GET['pid']) ? $_GET['pid'] : '';
 
 $post = get_post($pid);
 $playerID = $pid;
@@ -35,7 +35,7 @@ $comments = get_comments(
 
 <section id="personInfoBox">
     <div class="p-3 text-white text-3xl bg-gray-900">
-        <?php echo $name; ?>選手の個人情報
+        <?php echo $name; ?>
     </div>
 
     <div onclick="" class="mx-1 my-3 flex items-center relative  ">
@@ -45,7 +45,6 @@ $comments = get_comments(
         <div
             class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center  bg-gray-200  rounded-xl shadow-md shadow-gray-400">
             <div class="">
-                <h4 class="mr-2">氏名</h4>
                 <p>ランク</p>
                 <p>年齢</p>
                 <p>推奨</p>
@@ -54,7 +53,6 @@ $comments = get_comments(
                 <p>団体</p>
             </div>
             <div class="mr-2">
-                <h4 class="">:</h4>
                 <p>:</p>
                 <p>:</p>
                 <p>:</p>
@@ -63,9 +61,6 @@ $comments = get_comments(
                 <p>:</p>
             </div>
             <div class="flex-1 ">
-                <h4 class="font-semibold">
-                    <?php echo $name; ?>
-                </h4>
                 <p>
                     <?php echo $rank; ?>
                 </p>
@@ -88,7 +83,7 @@ $comments = get_comments(
             <form method="POST" action="/fight-ranking/vote">
                 <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
                 <button type="submit"
-                    class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-800 text-white rounded-md text-sm">
+                    class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md text-sm">
                     <i class="fa fa-thumbs-up"></i> 推奨</button>
             </form>
         </div>

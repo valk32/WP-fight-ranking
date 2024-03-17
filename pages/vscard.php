@@ -7,29 +7,30 @@ if (!defined('ABSPATH')) {
 }
 
 get_header();
+
+$orgtype = isset ($_GET['orgt']) ? intval($_GET['orgt']) : 0;
+$current_date = date('Y-m-d'); // Get the current date in the 'YYYY-MM-DD' format
+$args = array(
+    'post_type' => 'vsrequest',
+    'posts_per_page' => 10, // Number of posts to retrieve
+    'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
+    'orderby' => 'meta_value', // Order by meta value
+    'meta_key' => 'requestmatchvote', // Custom field key for the date
+    'order' => 'DESC', // Sort in ascending order
+    'meta_query' => array(
+        array(
+            'key' => 'org',
+            'value' => $orgtype, // Filter by the value of 'org' field
+        )
+    ),
+);
 ?>
 
 <section id="vscardsBox">
     <div class="p-3 w-full text-white text-3xl bg-gray-900">
-        夢の対戦カード 総合ランキング
+        <?php echo get_post_meta($orgtype, 'orgname', true) ?> 夢の対戦カード 投票ランキング
     </div>
     <?php
-    $orgtype = isset($_GET['orgt']) ? intval($_GET['orgt']) : 0;
-    $current_date = date('Y-m-d'); // Get the current date in the 'YYYY-MM-DD' format
-    $args = array(
-        'post_type' => 'vsrequest',
-        'posts_per_page' => 10, // Number of posts to retrieve
-        'paged' => get_query_var('paged') ? get_query_var('paged') : 1, // Current page number
-        'orderby' => 'meta_value', // Order by meta value
-        'meta_key' => 'requestmatchvote', // Custom field key for the date
-        'order' => 'DESC', // Sort in ascending order
-        'meta_query' => array(
-            array(
-                'key' => 'org',
-                'value' => $orgtype, // Filter by the value of 'org' field
-            )
-        ),
-    );
 
     $custom_query = new WP_Query($args);
 
@@ -62,14 +63,21 @@ get_header();
             ?>
             <div
                 class="my-8 w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition-all duration-500">
-                <div class=" flex justify-around w-full  items-center ">
-                    <div class="flex flex-col items-center">
+                <div class="flex justify-around w-full items-center flex-wrap sm:flex-nowrap">
+                    <div class="flex flex-col items-center order-1">
                         <a href="/fight-ranking/person?pid=<?php echo $player1 ?>">
                             <img src="<?php echo $img1 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
                         </a>
                     </div>
-                    <div class="flex flex-col justify-between">
-                        <div class="flex flex-1">
+
+                    <div class="flex flex-col items-center order-3">
+                        <a href="/fight-ranking/person?pid=<?php echo $player2 ?>">
+                            <img src="<?php echo $img2 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                        </a>
+                    </div>
+
+                    <div class="flex flex-col justify-between sm:order-2 order-4">
+                        <div class="flex hidden sm:flex">
                             <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
                                 <p>
                                     <?php echo $rank1 ?>
@@ -84,7 +92,7 @@ get_header();
                             <div class="flex flex-col justify-evenly text-center gap-2 font-bold text-red-500">
                                 <p class="truncate">ランク</p>
                                 <p>戦績</p>
-                                <p>推奨</p>
+                                <p>投票</p>
                             </div>
                             <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
                                 <p>
@@ -108,12 +116,6 @@ get_header();
                         </form>
 
                     </div>
-
-                    <div class="flex flex-col items-center">
-                        <a href="/fight-ranking/person?pid=<?php echo $player2 ?>">
-                            <img src="<?php echo $img2 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
-                        </a>
-                    </div>
                 </div>
                 <div class="w-full text-center">
                     <form method="POST" action="/fight-ranking/vote" class="inline">
@@ -131,19 +133,19 @@ get_header();
                     <form method="POST" action="/fight-ranking/vote" class="inline">
                         <input type="hidden" name="match_id" value="<?php echo $matchID ?>">
                         <input type="hidden" name="vote_hand" value="1">
-                        <button type="submit" class="w-[calc(<?php echo $percent2 - 2 ?>%<?php if ($percent2 == 100) {
-                                 echo '-8rem';
-                             }
-                             ?>)] min-w-32 inline text-center rounded-md
-                        text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900
-                         ">
+                        <button type="submit"
+                            class="w-[calc(<?php echo $percent2 - 2 ?>%<?php if ($percent2 == 100) {
+                                     echo '-8rem';
+                                 }
+                                 ?>)] min-w-32 inline text-center rounded-md
+                        text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 truncate">
                             <?php echo $name2 ?>(
                             <?php echo number_format($percent2, 1) ?>%)
                         </button>
                     </form>
                 </div>
                 <div class="text-center mt-2 font-semibold flex justify-evenly items-center">
-                    <i class="fa fa-arrow-up" arria-hidden=true></i><span>勝者をタップで予想</span><i class="fa fa-arrow-up"
+                    <i class="fa fa-arrow-up" arria-hidden=true></i><span>勝敗予想をタップで投票!</span><i class="fa fa-arrow-up"
                         arria-hidden=true></i>
                 </div>
             </div>

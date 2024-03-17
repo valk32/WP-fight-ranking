@@ -8,9 +8,9 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-$ranktype = isset($_GET['ranktype']) ? intval($_GET['ranktype']) : 0;
-$weighttype = isset($_GET['weightt']) ? intval($_GET['weightt']) : 0;
-$favorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
+$ranktype = isset ($_GET['ranktype']) ? intval($_GET['ranktype']) : 0;
+$weighttype = isset ($_GET['weightt']) ? intval($_GET['weightt']) : 0;
+$favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
 ?>
 
 <div id="title" class="p-3 text-white text-3xl bg-gray-900">
@@ -61,7 +61,7 @@ $favorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
             $img = wp_get_attachment_url(get_post_meta($playerID, 'img', true));
             ?>
 
-            <div class="mx-1 my-3 flex items-center relative transition-all duration-500">
+            <div class="mx-1 my-3 flex gap-2 items-center transition-all duration-500">
                 <div>
                     <?php if ($key <= 2) { ?>
                         <img class="rounded-full w-16 h-16 text-center text-white" src="
@@ -84,27 +84,31 @@ $favorite = isset($_GET['favorite']) ? $_GET['favorite'] : '';
                     </a>
                 </div>
                 <div
-                    class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center bg-gray-200 bg-opacity-70 rounded-xl shadow-md shadow-gray-400">
+                    class="text-md p-4 my-2 flex flex-1 items-center bg-gray-200 bg-opacity-70 rounded-xl shadow-md shadow-gray-400">
                     <div class="flex-1 ">
                         <h4 class="text-2xl font-semibold">
                             <?php echo $name; ?>
                         </h4>
                         <div class="flex gap-2">
-                            <p><i class=" fa fa-thumbs-up"></i>
-                                <?php echo $vote; ?>
-                            </p>
-                            <p><i class="fa fa-angle-double-up" aria-hidden="true"></i>
-                                <?php echo $rank; ?>
-                            </p>
-                            <p><i class="fa fa-flag" aria-hidden="true"></i>
-                                <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record); ?>
-                            </p>
+                            <a href="/fight-ranking/person?pid=<?php echo $playerID ?>"
+                                class="p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 text-white rounded-md text-sm shadow-md shadow-gray-700">
+                                詳細ビュー <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                         </div>
                     </div>
-                    <a href="/fight-ranking/person?pid=<?php echo $playerID ?>"
-                        class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 text-white rounded-md text-sm shadow-md shadow-gray-700">
-                        詳細ビュー <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                 </div>
+                <div class="h-full w-20">
+                    <form method="POST" action="/fight-ranking/vote">
+                        <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
+                        <button type="submit"
+                            class="w-full h-full p-3 py-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md">
+                            <i class="fa fa-thumbs-up"></i>
+                            <p>
+                                <?php echo $vote ?>
+                            </p>
+                        </button>
+                    </form>
+                </div>
+
             </div>
             <?php
             $key += 1;
