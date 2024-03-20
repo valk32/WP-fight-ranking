@@ -52,11 +52,13 @@ $args = array(
             }
 
             $name1 = get_post_meta($player1, 'name', true);
+            $displayname1 = get_post_meta($player1, 'displayname', true);
             $img1 = wp_get_attachment_url(get_post_meta($player1, 'img', true));
             $record1 = get_post_meta($player1, 'record', true);
             $rank1 = get_post_meta($player1, 'rank', true);
 
             $name2 = get_post_meta($player2, 'name', true);
+            $displayname2 = get_post_meta($player2, 'name', true);
             $img2 = wp_get_attachment_url(get_post_meta($player2, 'img', true));
             $record2 = get_post_meta($player2, 'record', true);
             $rank2 = get_post_meta($player2, 'rank', true);
@@ -77,7 +79,7 @@ $args = array(
                     </div>
 
                     <div class="flex flex-col justify-between sm:order-2 order-4">
-                        <div class="flex hidden sm:flex">
+                        <div class="flex">
                             <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
                                 <p>
                                     <?php echo $rank1 ?>
@@ -125,21 +127,20 @@ $args = array(
                                  echo '-8rem';
                              }
                              ?>)] min-w-32 mt-3 inline text-center rounded-md text-gray-100 bg-red-800 p-2 shadow-md shadow-gray-700
-            hover:bg-gray-100 hover:text-gray-900  ">
-                            <?php echo $name1 ?>(
+            hover:bg-gray-100 hover:text-gray-900">
+                            <?php echo $displayname1 ? $displayname1 : $name1 ?>(
                             <?php echo number_format($percent1, 1) ?>%)
                         </button>
                     </form>
                     <form method="POST" action="/fight-ranking/vote" class="inline">
                         <input type="hidden" name="match_id" value="<?php echo $matchID ?>">
                         <input type="hidden" name="vote_hand" value="1">
-                        <button type="submit"
-                            class="w-[calc(<?php echo $percent2 - 2 ?>%<?php if ($percent2 == 100) {
-                                     echo '-8rem';
-                                 }
-                                 ?>)] min-w-32 inline text-center rounded-md
-                        text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 truncate">
-                            <?php echo $name2 ?>(
+                        <button type="submit" class="w-[calc(<?php echo $percent2 - 2 ?>%<?php if ($percent2 == 100) {
+                                 echo '-8rem';
+                             }
+                             ?>)] min-w-32 inline text-center rounded-md
+                        text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                            <?php echo $displayname2 ? $displayname2 : $name2 ?>(
                             <?php echo number_format($percent2, 1) ?>%)
                         </button>
                     </form>

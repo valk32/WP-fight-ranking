@@ -13,6 +13,7 @@ $pid = isset ($_GET['pid']) ? $_GET['pid'] : '';
 $post = get_post($pid);
 $playerID = $pid;
 $name = get_post_meta($playerID, 'name', true);
+$catchcopy = get_post_meta($playerID, 'catchcopy', true);
 $age = get_post_meta($playerID, 'age', true);
 $rank = get_post_meta($playerID, 'rank', true);
 $vote = get_post_meta($playerID, 'vote', true);
@@ -38,57 +39,31 @@ $comments = get_comments(
         <?php echo $name; ?>
     </div>
 
-    <div onclick="" class="mx-1 my-3 flex items-center relative  ">
-        <div class="p-2">
+    <div onclick="" class="mx-auto my-3 flex flex-col sm:flex-row items-center relative w-auto sm:w-[450px]">
+        <div class="p-2 mx-auto sm:mx-none">
             <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
         </div>
-        <div
-            class="text-md p-4 ml-4 my-2 w-full flex flex-1 items-center  bg-gray-200  rounded-xl shadow-md shadow-gray-400">
-            <div class="">
-                <p>ランク</p>
-                <p>年齢</p>
-                <p>推奨</p>
-                <p>戦績</p>
-                <p> 階級</p>
-                <p>団体</p>
-            </div>
-            <div class="mr-2">
-                <p>:</p>
-                <p>:</p>
-                <p>:</p>
-                <p>:</p>
-                <p>:</p>
-                <p>:</p>
-            </div>
-            <div class="flex-1 ">
-                <p>
-                    <?php echo $rank; ?>
+        <div class="text-md ml-4 my-2 w-full flex flex-col flex-1 justify-around">
+            <div class="flex-1 p-4 bg-gray-200 w-full rounded-xl shadow-md shadow-gray-400">
+                <p class="text-xl">
+                    <?php echo $catchcopy ?>
                 </p>
-                <p>
-                    <?php echo $age; ?>
+                <p class="text-2xl font-bold">
+                    <?php echo $name ?>
                 </p>
-                <p><i class="fa fa-thumbs-up"></i>
-                    <?php echo $vote; ?>
-                </p>
-                <p>
-                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record); ?>
-                </p>
-                <p>
-                    <?php echo $weight; ?>
-                </p>
-                <p>
-                    <?php echo $org; ?>
+                <p class="text-xl">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                    <?php echo $vote ?>
                 </p>
             </div>
-            <form method="POST" action="/fight-ranking/vote">
+            <form method="POST" action="/fight-ranking/vote" class="w-full">
                 <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
                 <button type="submit"
-                    class="absolute bottom-4 right-3 p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md text-sm">
-                    <i class="fa fa-thumbs-up"></i> 推奨</button>
+                    class="p-3 py-2 w-full mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md">
+                    応援投票 <i class="fa fa-thumbs-up"></i></button>
             </form>
         </div>
     </div>
-
     <?php
     foreach ($comments as $key => $comment) {
         echo '<div class="flex items-center p-2 hover:cursor-pointer  " onclick="">';

@@ -42,7 +42,7 @@ $total_pages = ceil($total_comments / $comments_per_page);
             echo '</div>';
             echo '<div class="p-1 mx-2 flex-1">';
             echo '<h3 class="font-bold"></h3>';
-            echo '<p href="#">' . $comment->comment_content . '</p>';
+            echo '<p href="#" class="break-all">' . $comment->comment_content . '</p>';
             echo '<p class="text-sm"> ';
             echo $comment->comment_author;
             echo ' </p><p>' . $comment->comment_date . ' </p>';

@@ -70,28 +70,27 @@ wp_reset_postdata();
                 continue;
             ?>
             <div
-                class="relative flex justify-around w-full items-center py-10 sm:p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
-                <div class="flex items-center gap-4">
+                class="relative flex flex-wrap justify-around w-full items-center py-10 sm:p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
+                <div class="flex items-center gap-4 order-1">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player1'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player1'], 'img', true)) ?>"
                             class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
                     </a>
                 </div>
-                <div class="flex flex-col justify-between">
+                <div class="flex flex-col w-48 justify-between order-4 sm:order-2">
                     <div class="flex flex-col flex-1 text-md md:text-2xl">
-                        <p class="font-bold text-left ml-1">
+                        <p class="font-bold ml-1 text-center break-all">
                             <?php echo get_post_meta($content['player1'], 'name', true) ?>
                         </p>
                         <div class="mx-auto text-red-500">
                             <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="w-16 h-16" />
                         </div>
-                        <p class="font-bold text-right mr-1">
+                        <p class="font-bold mr-1 text-center break-all">
                             <?php echo get_post_meta($content['player2'], 'name', true) ?>
                         </p>
                     </div>
                 </div>
-
-                <div class="flex items-center gap-4 justify-end">
+                <div class="flex items-center gap-4 justify-end order-3">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player2'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player2'], 'img', true)) ?>"
                             class="h-[180px] w-[160px] object-cover rounded-md" alt="" />

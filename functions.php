@@ -214,7 +214,8 @@ add_filter('comment_form_submit_button', 'custom_comment_form_submit_button');
 function custom_comment_form_defaults($defaults)
 {
     $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-xl bg-gray-900">
-                コメントを残す
+        <i class="fa fa-comment" aria-hidden="true"></i>
+        応援コメントする
             </div>';
     $defaults['author'] = '<input type="text" name="author" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
     // $defaults['email'] = '<input type="text" name="email" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
