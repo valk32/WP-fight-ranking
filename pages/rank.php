@@ -15,7 +15,7 @@ $favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
 
 <div id="title" class="p-3 text-white text-3xl bg-gray-900">
     <?php if ($favorite != '') {
-        echo '好きな格闘家 総合ランキング';
+        echo '人気選手ランキング';
     } else {
         echo '格闘家 総合ランキング';
     }
@@ -52,6 +52,7 @@ $favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
             $custom_query->the_post();
             $playerID = get_the_ID();
             $name = get_post_meta($playerID, 'name', true);
+            $displayname = get_post_meta($playerID, 'displayname', true);
             $catchcopy = get_post_meta($playerID, 'catchcopy', true);
             $age = get_post_meta($playerID, 'age', true);
             $rank = get_post_meta($playerID, 'rank', true);
@@ -62,8 +63,8 @@ $favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
             $img = wp_get_attachment_url(get_post_meta($playerID, 'img', true));
             ?>
 
-            <div class="mx-1 my-3 flex flex-col sm:flex-row gap-2 items-stretch transition-all duration-500">
-                <div class="flex flex-wrap flex-grow items-center">
+            <div class="mx-1 my-3 flex flex-col sm:flex-row sm:items-center gap-2 items-stretch transition-all duration-500">
+                <div class="flex flex-1 flex-wrap flex-grow items-center">
                     <div class="flex items-center mx-auto sm:mx-none">
                         <div>
                             <?php if ($key <= 2) { ?>
@@ -89,7 +90,7 @@ $favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
                         </div>
                     </div>
                     <div
-                        class="text-md p-4 flex flex-1 min-w-[150px] items-center bg-gray-200 bg-opacity-70 rounded-xl shadow-md shadow-gray-400">
+                        class="text-md p-4 flex flex-1 min-w-[250px] items-center bg-gray-200 bg-opacity-70 rounded-xl shadow-md shadow-gray-400">
                         <div class="flex-1 text-center sm:text-left">
                             <h4 class="text-2xl font-semibold">
                                 <p class="text-xl inline font-normal">
@@ -102,16 +103,16 @@ $favorite = isset ($_GET['favorite']) ? $_GET['favorite'] : '';
                             <div class="p-2">
                                 <a href="/fight-ranking/person?pid=<?php echo $playerID ?>"
                                     class="p-3 py-2 mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 text-white rounded-md text-sm shadow-md shadow-gray-700">
-                                    詳細ビュー <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
+                                    <?php echo $displayname? $displayname:$name ?>の評判 <i class="fa fa-arrow-right" aria-hidden="true"></i> </a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="w-full sm:w-20 py-3">
+                <div class="w-full sm:w-24 h-[60px] sm:h-[130px] py-1">
                     <form method="POST" action="/fight-ranking/vote">
                         <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
                         <button type="submit"
-                            class="w-full h-full p-3 py-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 text-white shadow-md rounded-md overflow-hidden shadow-gray-700">
+                            class="w-full h-full p-3 py-2 bg-red-500 hover:bg-gray-100 hover:text-gray-900 text-white shadow-md rounded-md overflow-hidden shadow-gray-700">
                             <p class="inline sm:block"><i class="fa fa-thumbs-up"></i></p>
                             <p class="text-xl inline sm:block">
                                 <?php echo $vote ?>

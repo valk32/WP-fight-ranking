@@ -28,13 +28,14 @@ $args = array(
 
 <section id="vscardsBox">
     <div class="p-3 w-full text-white text-3xl bg-gray-900">
-        <?php echo get_post_meta($orgtype, 'orgname', true) ?> 夢の対戦カード 投票ランキング
+    【<?php echo get_post_meta($orgtype, 'orgname', true) ?>】夢の対戦カード
     </div>
     <?php
 
     $custom_query = new WP_Query($args);
 
     if ($custom_query->have_posts()) {
+        $key = 0;
         while ($custom_query->have_posts()) {
             $custom_query->the_post();
             $matchID = get_the_ID();
@@ -64,82 +65,75 @@ $args = array(
             $rank2 = get_post_meta($player2, 'rank', true);
             ?>
             <div
-                class="my-8 w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition-all duration-500">
-                <div class="flex justify-around w-full items-center flex-wrap sm:flex-nowrap">
-                    <div class="flex flex-col items-center order-1">
-                        <a href="/fight-ranking/person?pid=<?php echo $player1 ?>">
-                            <img src="<?php echo $img1 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="flex flex-col items-center order-3">
-                        <a href="/fight-ranking/person?pid=<?php echo $player2 ?>">
-                            <img src="<?php echo $img2 ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
-                        </a>
-                    </div>
-
-                    <div class="flex flex-col justify-between sm:order-2 order-4">
-                        <div class="flex">
-                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
-                                <p>
-                                    <?php echo $rank1 ?>
-                                </p>
-                                <p>
-                                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record1) ?>
-                                </p>
-                                <p>
-                                    <?php echo $vote1 ?>
-                                </p>
+                class="relative mt-8 p-3 w-full bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 transition-all duration-500">
+                <div class="absolute top-4 left-1 w-full sm:w-auto">
+                <?php if ($key <= 2) { ?>    
+                    <img class="rounded-full w-16 h-16 text-center text-white" src="
+                        <?php if ($key == 0) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge1.png';
+                        } elseif ($key == 1) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge2.png';
+                        } elseif ($key == 2) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge3.png';
+                        }
+                        ?>"></img>
+                    <?php } else {
+                        echo '<div class="w-16 h-16 block text-center text-4xl text-gray-100 text-shadow-md text-shadow-gray-400 font-semibold">' . ($key + 1) . '</div>';
+                    }?>
+                </div>
+                <div style="background-image: url('/fight-ranking/wp-content/uploads/2024/03/VS1.jpg')"
+                    class="px-1 pt-2 pb-4 w-full max-h-full bg-cover bg-center rounded-lg shadow">
+                    <div class="mt-4 flex flex-col justify-around items-center">
+                        <div class="w-full flex justify-around">
+                            <div class="sm:w-48">
+                                <img data-modal-target="modal1<?php echo $matchID ?>"
+                                    data-modal-toggle="modal1<?php echo $matchID ?>" src="<?php echo $img1 ?>"
+                                    class="mx-auto w-32 h-32 sm:w-48 sm:h-48 rounded-full border-4 border-gray-400 border-solid"
+                                    alt="">
                             </div>
-                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold text-red-500">
-                                <p class="truncate">ランク</p>
-                                <p>戦績</p>
-                                <p>投票</p>
-                            </div>
-                            <div class="flex flex-col justify-evenly text-center gap-2 font-bold">
-                                <p>
-                                    <?php echo $rank2 ?>
-                                </p>
-                                <p>
-                                    <?php echo preg_replace('/(\d+)-(\d+)-(\d+)\((\d+)\)/', '$1戦$2勝$3敗($4KO)', $record2) ?>
-                                </p>
-                                <p>
-                                    <?php echo $vote2 ?>
-                                </p>
+                            <div class="sm:w-48">
+                                <img data-modal-target="modal2<?php echo $matchID ?>"
+                                    data-modal-toggle="modal2<?php echo $matchID ?>" src="<?php echo $img2 ?>"
+                                    class="mx-auto w-32 h-32 sm:w-48 sm:h-48 rounded-full border-4 border-gray-400 border-solid"
+                                    alt="">
                             </div>
                         </div>
-                        <form method="POST" action="/fight-ranking/vote">
-                            <input type="hidden" name="player_id" value="<?php echo $matchID ?>">
-                            <button
-                                class="w-36 mt-3 mx-auto text-center rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 block">
-                                投票(
-                                <?php echo $vote ?>)
-                            </button>
-                        </form>
-
+                        <div class="w-full flex justify-around">
+                            <h5 class="text-2xl text-center text-gray-100 font-semibold">
+                                <?php echo $displayname1 ? $displayname1 : $name1 ?>
+                            </h5>
+                            <h5 class="text-2xl text-center text-gray-100 font-semibold">
+                                <?php echo $displayname2 ? $displayname2 : $name2 ?>
+                            </h5>
+                        </div>
                     </div>
+                    
                 </div>
-                <div class="w-full text-center">
-                    <form method="POST" action="/fight-ranking/vote" class="inline">
+                <form method="POST" action="/fight-ranking/vote">
+                    <input type="hidden" name="player_id" value="<?php echo $matchID ?>">
+                    <button
+                        class="w-full sm:w-48 p-4 mt-3 mx-auto text-center text-xl rounded-md text-gray-100 bg-gray-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900 block">
+                        見たい <i class="fa fa-thumbs-up" aria-hidden="true"></i> (
+                        <?php echo $vote ?>)
+                    </button>
+                </form>
+                <div class="w-full text-center flex">
+                    <form method="POST" action="/fight-ranking/vote" class="w-[calc(<?php echo $percent1 ?>%<?php if ($percent1 == 100) {
+                                 echo '-8rem';
+                             }?>)] min-w-32">
                         <input type="hidden" name="match_id" value="<?php echo $matchID ?>">
                         <input type="hidden" name="vote_hand" value="0">
-                        <button class="w-[calc(<?php echo $percent1 - 2 ?>%<?php if ($percent1 == 100) {
-                                 echo '-8rem';
-                             }
-                             ?>)] min-w-32 mt-3 inline text-center rounded-md text-gray-100 bg-red-800 p-2 shadow-md shadow-gray-700
-            hover:bg-gray-100 hover:text-gray-900">
+                        <button type="submit" class="w-full h-full block text-center rounded-md text-gray-100 bg-red-500 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900">
                             <?php echo $displayname1 ? $displayname1 : $name1 ?>(
                             <?php echo number_format($percent1, 1) ?>%)
                         </button>
                     </form>
-                    <form method="POST" action="/fight-ranking/vote" class="inline">
+                    <form method="POST" action="/fight-ranking/vote" class="w-[calc(<?php echo $percent2 ?>%<?php if ($percent2 == 100) {
+                                 echo '-8rem';
+                             }?>)] min-w-32">
                         <input type="hidden" name="match_id" value="<?php echo $matchID ?>">
                         <input type="hidden" name="vote_hand" value="1">
-                        <button type="submit" class="w-[calc(<?php echo $percent2 - 2 ?>%<?php if ($percent2 == 100) {
-                                 echo '-8rem';
-                             }
-                             ?>)] min-w-32 inline text-center rounded-md
-                        text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900">
+                        <button type="submit" class="w-full h-full block text-center rounded-md text-gray-100 bg-blue-900 p-2 shadow-md shadow-gray-700 hover:bg-gray-100 hover:text-gray-900">
                             <?php echo $displayname2 ? $displayname2 : $name2 ?>(
                             <?php echo number_format($percent2, 1) ?>%)
                         </button>
@@ -151,6 +145,7 @@ $args = array(
                 </div>
             </div>
             <?php
+            $key++;
         }
 
         // Pagination

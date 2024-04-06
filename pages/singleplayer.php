@@ -39,30 +39,34 @@ $comments = get_comments(
         <?php echo $name; ?>
     </div>
 
-    <div onclick="" class="mx-auto my-3 flex flex-col sm:flex-row items-center relative w-auto sm:w-[450px]">
+    <div onclick="" class="mx-auto my-3 flex flex-col gap-3 sm:flex-row relative w-auto sm:w-full">
         <div class="p-2 mx-auto sm:mx-none">
-            <img src="<?php echo $img ?>" class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+            <img src="<?php echo $img ?>" class="w-full sm:h-[180px] sm:w-[160px] object-cover rounded-md" alt="" />
         </div>
-        <div class="text-md ml-4 my-2 w-full flex flex-col flex-1 justify-around">
-            <div class="flex-1 p-4 bg-gray-200 w-full rounded-xl shadow-md shadow-gray-400">
+        <div class="text-md my-2 w-full flex flex-col flex-1 justify-around">
+            <div class="flex-1 flex flex-col justify-around p-4 bg-gray-200 w-full rounded-xl shadow-md shadow-gray-400">
                 <p class="text-xl">
                     <?php echo $catchcopy ?>
                 </p>
-                <p class="text-2xl font-bold">
+                <p class="text-2xl font-bold break-all">
                     <?php echo $name ?>
                 </p>
+	 <p class="text-xl">
+                    総合ランキング : <?php echo $rank ?>位
+                </p>
                 <p class="text-xl">
-                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                    <?php echo $vote ?>
+                   ファン投票数 : <i class="fa fa-thumbs-up"></i><?php echo $vote?>
                 </p>
             </div>
-            <form method="POST" action="/fight-ranking/vote" class="w-full">
+        </div>
+        <form method="POST" action="/fight-ranking/vote" class="w-full sm:w-[120px]">
                 <input type="hidden" name="player_id" value="<?php echo $playerID ?>">
                 <button type="submit"
-                    class="p-3 py-2 w-full mt-2 bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md">
-                    応援投票 <i class="fa fa-thumbs-up"></i></button>
-            </form>
-        </div>
+                    class="p-3 py-2 mt-2 text-2xl bg-red-500 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md block w-full h-full">
+                   <span class="inline sm:block"><i class="fa fa-thumbs-up"></i><span>
+	               <span class="inline sm:block"><?php echo $vote?></span>
+	</button>
+        </form>
     </div>
     <?php
     foreach ($comments as $key => $comment) {

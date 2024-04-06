@@ -70,52 +70,53 @@ wp_reset_postdata();
                 continue;
             ?>
             <div
-                class="relative flex flex-wrap justify-around w-full items-center py-10 sm:p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
-                <div class="flex items-center gap-4 order-1">
+                class="flex flex-wrap justify-around w-full items-center py-5 sm:p-3 border border-gray-200 rounded-lg shadow hover:bg-white transition-all duration-500">
+                <div class="w-full sm:w-auto">
+                    <img class="mx-auto w-20 h-20" src="
+                        <?php if ($key == 0) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge1.png';
+                        } elseif ($key == 1) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge2.png';
+                        } elseif ($key == 2) {
+                            echo '/fight-ranking/wp-content/uploads/2024/03/badge3.png';
+                        } else {
+                            echo '';
+                        }
+                        ?>"></img>
+                </div>
+                <div class="flex flex-col items-center gap-4 order-1">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player1'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player1'], 'img', true)) ?>"
-                            class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                            class="w-32 h-36 sm:w-44 sm:h-48 object-cover rounded-md" alt="" />
                     </a>
+                    <p class="font-bold ml-1 text-center break-all">
+                        <?php echo get_post_meta($content['player1'], 'displayname', true)? get_post_meta($content['player1'], 'displayname', true):get_post_meta($content['player1'], 'name', true) ?>
+                    </p>
                 </div>
-                <div class="flex flex-col w-48 justify-between order-4 sm:order-2">
+                <div class="flex flex-1 flex-col w-auto justify-between order-2">
                     <div class="flex flex-col flex-1 text-md md:text-2xl">
-                        <p class="font-bold ml-1 text-center break-all">
-                            <?php echo get_post_meta($content['player1'], 'name', true) ?>
-                        </p>
                         <div class="mx-auto text-red-500">
-                            <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="w-16 h-16" />
+                            <img src="/fight-ranking/wp-content/uploads/2024/03/VS.png" class="w-24 h-24" />
                         </div>
-                        <p class="font-bold mr-1 text-center break-all">
-                            <?php echo get_post_meta($content['player2'], 'name', true) ?>
-                        </p>
                     </div>
                 </div>
-                <div class="flex items-center gap-4 justify-end order-3">
+                <div class="flex flex-col  items-center gap-4 justify-end order-3">
                     <a href="/fight-ranking/person?pid=<?php echo $content['player2'] ?>">
                         <img src="<?php echo wp_get_attachment_url(get_post_meta($content['player2'], 'img', true)) ?>"
-                            class="h-[180px] w-[160px] object-cover rounded-md" alt="" />
+                            class="w-32 h-36 sm:w-44 sm:h-48 object-cover rounded-md" alt="" />
                     </a>
+                    <p class="font-bold mr-1 text-center break-all">
+                            <?php echo get_post_meta($content['player2'], 'displayname', true)?get_post_meta($content['player2'], 'displayname', true):get_post_meta($content['player2'], 'name', true) ?>
+                    </p>
                 </div>
-
-                <img class="absolute top-1 left-1 rounded-full w-12 h-12 text-center text-white" src="
-        <?php if ($key == 0) {
-            echo '/fight-ranking/wp-content/uploads/2024/03/badge1.png';
-        } elseif ($key == 1) {
-            echo '/fight-ranking/wp-content/uploads/2024/03/badge2.png';
-        } elseif ($key == 2) {
-            echo '/fight-ranking/wp-content/uploads/2024/03/badge3.png';
-        } else {
-            echo '';
-        }
-        ?>"></img>
             </div>
             <?php
         }
         echo '</div>';
         echo '<a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '"
-        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white">';
+        class="-top-5 left-4 rounded-3xl absolute bg-gray-200 py-2 px-8 shadow-md shadow-gray-700 hover:bg-white">【';
         echo get_post_meta($group['org'], 'orgname', true);
-        echo '<span class="hidden sm:inline"> 夢の対戦カード 投票ランキング</span></a>';
+        echo '<span class="hidden sm:inline">】夢の対戦カード</span></a>';
         echo '<div class="flex justify-center">
         <button class="mt-4 p-2 bg-gray-900 text-white rounded-md hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700">
             <a href="/fight-ranking/requestcard?orgt=' . $group['org'] . '" class="text-sm">もっと見る <i class="fa fa-arrow-circle-right"></i></a>

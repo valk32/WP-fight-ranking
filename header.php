@@ -65,21 +65,72 @@
                             </ul>
                         </div>
                     </li>
-                    <li> <a href="/fight-ranking/prediction"
+                    <!-- <li> <a href="/fight-ranking/prediction"
                             class="block py-2 px-3 rounded md:p-0 md:hover:text-blue-500 text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700">
                             勝敗予想 </a>
+                    </li> -->
+
+
+                    <li>
+                        <button id="dropdownNavbarLink0" data-dropdown-toggle="dropdownNavbar0"
+                            class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
+                            aria-current="page">
+                            勝敗予想    
+                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </button>
+                        <div id="dropdownNavbar0"
+                            class="z-10 hidden font-normal divide-y rounded-lg shadow w-auto bg-gray-800 divide-gray-600">
+                            <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
+                                <?php
+                                $current_date = date('Y-m-d');
+                                $args = array(
+                                    'post_type' => 'competition',
+                                    'posts_per_page' => -1, // Number of posts to retrieve
+                                    'order' => 'ASC',
+                                    'meta_key' => 'date',
+                                    array(
+                                        'key' => 'date',
+                                        'value' => $current_date,
+                                        'compare' => '>=',
+                                        'type' => 'DATE',
+                                    ),
+                                );
+
+                                $custom_query = new WP_Query($args);
+                                if ($custom_query->have_posts()) {
+                                    while ($custom_query->have_posts()) {
+                                        $custom_query->the_post();
+                                        $competitionID = get_the_ID();
+                                        $competition_name = get_post_meta($competitionID, 'competition_name', true);
+                                        $date = get_post_meta($competitionID, 'date', true);
+                                        ?>
+                                        <li class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
+                                            <a <?php echo 'href="/fight-ranking/prediction/?id='.$competitionID.'"' ?>
+                                                class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto cursor-pointer text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
+                                                aria-current="page">
+                                                <?php echo $competition_name ?> 「<?php  echo (new DateTime($date))->format("Y-m-d"); ?>」
+                                            </a>
+                                        </li>
+                                    <?php }
+                                    wp_reset_postdata();
+                                }
+                                ?>
+                            </ul>
+                        </div>
                     </li>
+
+
                     <li>
                         <a href="/fight-ranking/rank?favorite=1"
                             class="block py-2 px-3 rounded md:p-0 md:hover:text-blue-500 text-white hover:bg-gray-700 hover:text-white md:hover:bg-transparent border-gray-700">
-                            人気総選挙
+                            人気選手ランキング
                         </a>
                     </li>
                     <li>
                         <button id="dropdownNavbarLink2" data-dropdown-toggle="dropdownNavbar2"
                             class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
                             aria-current="page">
-                            総選挙
+                            階級別ランキング
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
                         </button>
                         <div id="dropdownNavbar2"
@@ -97,22 +148,24 @@
                                     while ($custom_query->have_posts()) {
                                         $custom_query->the_post();
                                         $orgID = get_the_ID();
+                                        $weighttypes = get_post_meta($orgID, 'org_weighttype', true);
                                         ?>
                                         <li class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                            <button id="dropdownNavbarLink<?php echo $orgID ?>"
+                                            <a id="dropdownNavbarLink<?php echo $orgID ?>" <?php if(!$weighttypes) echo 'href="/fight-ranking/rank/?ranktype='.$orgID.'"' ?>
                                                 data-dropdown-toggle="dropdownNavbar<?php echo $orgID ?>"
-                                                class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
+                                                class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto cursor-pointer text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
                                                 aria-current="page">
-                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>総選挙
-                                                <i class="fa fa-angle-down" aria-hidden="true">
+                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>階級
+                                                <?php if($weighttypes) echo '<i class="fa fa-angle-down" aria-hidden="true">' ?>
                                                 </i>
-                                            </button>
+                                            </a>
+                                            <?php
+                                            if ($weighttypes) {
+                                                ?>
                                             <div id="dropdownNavbar<?php echo $orgID ?>"
                                                 class="z-10 hidden font-normal divide-y rounded-lg shadow w-44 bg-gray-800 divide-gray-600">
                                                 <ul class="py-2 text-sm text-gray-200" aria-labelledby="dropdownLargeButton">
                                                     <?php
-                                                    $weighttypes = get_post_meta($orgID, 'org_weighttype', true);
-                                                    if ($weighttypes) {
                                                         foreach ($weighttypes as $key => $weightID) {
                                                             ?>
                                                             <li>
@@ -121,10 +174,11 @@
                                                                     <?php echo get_post_meta($weightID, 'weightname', true) ?>
                                                                 </a>
                                                             <?php }
-                                                    } ?>
+                                                    ?>
                                                     </li>
                                                 </ul>
                                             </div>
+                                            <?php } ?>
                                         </li>
                                     <?php }
                                     wp_reset_postdata();
@@ -139,4 +193,4 @@
         </div>
     </nav>
     <main class="px-4 py-36 bg-auto bg-cover bg-center min-h-[92vh] " style="background-image: url('')">
-        <div class="w-auto max-w-[700px] mx-auto">
+        <div class="relative w-auto max-w-[700px] mx-auto">

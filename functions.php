@@ -205,7 +205,7 @@ function custom_comment_form_submit_button($submit_button)
     // Customize the submit button as needed
     $submit_button = '<button type="submit"
                             class="p-3 py-2 mt-2 float-right bg-gray-900 hover:bg-gray-100 hover:text-gray-900 shadow-md shadow-gray-700 text-white rounded-md text-sm">
-                            <i class="fa fa-send"></i> 転送</button>';
+                            <i class="fa fa-send"></i> コメントする</button>';
 
     return $submit_button;
 }
@@ -215,7 +215,7 @@ function custom_comment_form_defaults($defaults)
 {
     $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-xl bg-gray-900">
         <i class="fa fa-comment" aria-hidden="true"></i>
-        応援コメントする
+        自由コメント欄
             </div>';
     $defaults['author'] = '<input type="text" name="author" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
     // $defaults['email'] = '<input type="text" name="email" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
