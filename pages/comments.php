@@ -29,7 +29,7 @@ $total_comments = wp_count_comments(
 $total_pages = ceil($total_comments / $comments_per_page);
 ?>
 <section id="comment" class="bg-gray-100 shadow-md shadow-gray-700">
-    <h3 class="mt-3 p-3 text-white bg-gray-900 text-3xl">全コメント</h3>
+    <h3 class="mt-3 p-3 text-white bg-gray-900 text-[3.8vw] sm:text-3xl ">みんなのコメント</h3>
     <div id="commentSection" class="bg-opacity-50">
 
         <?php
@@ -38,7 +38,7 @@ $total_pages = ceil($total_comments / $comments_per_page);
 
             echo '<div class="flex items-center p-2 hover:cursor-pointer hover:bg-gray-200 transition-all duration-500" onclick="">';
             echo '<div class="mx-2">';
-            echo '<img src="' . $img_url . '" class="w-24 rounded-md border-3 border-gray-100" />';
+            echo '<img src="' . ($img_url?$img_url:"/fight-ranking/wp-content/uploads/2024/04/f5488743a4bacadebf963cb6d644128a.jpg") . '" class="w-24 rounded-md border-3 border-gray-100" />';
             echo '</div>';
             echo '<div class="p-1 mx-2 flex-1">';
             echo '<h3 class="font-bold"></h3>';
@@ -52,7 +52,7 @@ $total_pages = ceil($total_comments / $comments_per_page);
         }
 
         if (!$total_comments) {
-            echo '<div class="p-4 text-gray-900 text-2xl font-bold text-shadow-md text-center ">
+            echo '<div class="p-4 text-gray-900 text-[3vw] sm:text-2xl font-bold text-shadow-md text-center ">
     コメントなし
 </div>';
         }
@@ -64,7 +64,7 @@ $total_pages = ceil($total_comments / $comments_per_page);
 <!-- Pagination -->
 <?php
 if ($total_pages > 1) {
-    echo '<div class="mt-4 text-xl font-semibold text-shadow-lg">';
+    echo '<div class="mt-4 text-[2.6vw] sm: text-[2.6vw] sm:text-xl  font-semibold text-shadow-lg">';
     echo paginate_links(
         array(
             'base' => get_pagenum_link(1) . '%_%',

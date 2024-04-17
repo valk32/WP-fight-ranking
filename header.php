@@ -8,7 +8,7 @@
     <title>応援サイト</title>
 </head>
 
-<body>
+<body class="">
     <nav
         class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -57,7 +57,7 @@
                                         <li>
                                             <a href="/fight-ranking/requestcard?orgt=<?php echo $orgID ?>"
                                                 class="block px-4 py-2 hover:bg-gray-600 hover:text-white">
-                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>編
+                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>
                                             </a>
                                         </li>
                                     <?php }
@@ -86,13 +86,16 @@
                                 $args = array(
                                     'post_type' => 'competition',
                                     'posts_per_page' => -1, // Number of posts to retrieve
+                                    'orderby' => 'meta_value',
                                     'order' => 'ASC',
                                     'meta_key' => 'date',
-                                    array(
-                                        'key' => 'date',
-                                        'value' => $current_date,
-                                        'compare' => '>=',
-                                        'type' => 'DATE',
+                                    'meta_query' => array( // Correctly structure the meta_query
+                                        array(
+                                            'key' => 'date',
+                                            'value' => $current_date,
+                                            'compare' => '>=',
+                                            'type' => 'DATE',
+                                        ),
                                     ),
                                 );
 
@@ -155,7 +158,7 @@
                                                 data-dropdown-toggle="dropdownNavbar<?php echo $orgID ?>"
                                                 class="flex items-center justify-between w-full py-2 px-3 rounded md:border-0 md:p-0 md:w-auto cursor-pointer text-white md:hover:text-blue-500 focus:text-white border-gray-700 hover:bg-gray-700 md:hover:bg-transparent"
                                                 aria-current="page">
-                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>階級
+                                                <?php echo get_post_meta($orgID, 'orgname', true) ?>
                                                 <?php if($weighttypes) echo '<i class="fa fa-angle-down" aria-hidden="true">' ?>
                                                 </i>
                                             </a>
@@ -192,5 +195,5 @@
             </div>
         </div>
     </nav>
-    <main class="px-4 py-36 bg-auto bg-cover bg-center min-h-[92vh] " style="background-image: url('')">
-        <div class="relative w-auto max-w-[700px] mx-auto">
+    <main class="px-4 py-28 bg-auto bg-cover bg-center min-h-[92vh] " style="background-image: url('')">
+        <div class="relative w-auto max-w-[700px] mx-auto text-[2.4vw] sm:text-base">

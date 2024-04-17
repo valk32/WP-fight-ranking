@@ -213,14 +213,17 @@ add_filter('comment_form_submit_button', 'custom_comment_form_submit_button');
 
 function custom_comment_form_defaults($defaults)
 {
-    $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-xl bg-gray-900">
+    $defaults['title_reply'] = '<div class="p-3 mb-3 text-white text-[2.6vw] sm:text-xl bg-gray-900">
         <i class="fa fa-comment" aria-hidden="true"></i>
         自由コメント欄
             </div>';
+    $defaults['fields']['author'] = '<p class="comment-form-author"><label for="author">ニックネーム</label> <input id="author" name="author" type="text" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required></p>';
     $defaults['author'] = '<input type="text" name="author" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
     // $defaults['email'] = '<input type="text" name="email" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required>';
     $defaults['comment_field'] = '<textarea name="comment" id="comment" cols="45" rows="3" class="p-3 w-full bg-gray-100 border-3 border-gray-800" required></textarea>';
     $defaults['fields']['redirect_to'] = '<input type="hidden" name="redirect_to" value="' . esc_url(get_permalink()) . '" />';
+    $defaults['comment_notes_before'] = ''; // Removes notes before the comment form
+    // $defaults['comment_notes_after'] = ''; // Removes notes after the comment form
     unset($defaults['fields']['email']);
 
     return $defaults;

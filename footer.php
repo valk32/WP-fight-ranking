@@ -1,4 +1,7 @@
 </div>
+<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+    <?php if (function_exists ('adinserter')) echo adinserter (7); ?>
+</div>
 </main>
 
 <footer class="bg-gray-900 text-white text-center p-6">
